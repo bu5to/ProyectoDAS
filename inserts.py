@@ -3,11 +3,9 @@
 # 1 - imports
 from datetime import date
 
-from actor import Actor
 from base import Session, engine, Base
-from contact_details import ContactDetails
-from movie import Movie
-from stuntman import Stuntman
+from main import Marca, User, Coche
+
 
 # 2 - generate database schema
 Base.metadata.create_all(engine)
@@ -16,6 +14,7 @@ Base.metadata.create_all(engine)
 session = Session()
 
 # # 4 - create movies
+u1 = User("jebusto", "jebusto@gmail.com", "pablo")
 # bourne_identity = Movie("The Bourne Identity", date(2002, 10, 11))
 # furious_7 = Movie("Furious 7", date(2015, 4, 2))
 # pain_and_gain = Movie("Pain & Gain", date(2013, 8, 23))
@@ -54,7 +53,8 @@ session = Session()
 # session.add(matt_stuntman)
 # session.add(dwayne_stuntman)
 # session.add(mark_stuntman)
+session.add(u1)
 
 # # 10 - commit and close session
-# session.commit()
-# session.close()
+session.commit()
+session.close()

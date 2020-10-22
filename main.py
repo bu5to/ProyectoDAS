@@ -1,24 +1,24 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
-from sqlalchemy import create_engine, Column, String, Integer
-from base import base
+from sqlalchemy import create_engine, Column, String, Integer, ForeignKey
+from base import Base
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://das:das@localhost/bustomoviles'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-engine = create_engine('mysql://root:root@localhost/bustomoviles')
+# engine = create_engine('')
 
 # db = SQLAlchemy(app)
 
 class User(Base):
     __tablename__ = 'user'
 
-    id = db.Column(db.Integer, primary_key=True)
-    usuario = db.Column(db.String(20), unique=True)
-    email = db.Column(db.String(30), unique=True)
-    passwd = db.Column(db.String(80))
+    id = Column(Integer, primary_key=True)
+    usuario = Column(String(20), unique=True)
+    email = Column(String(30), unique=True)
+    passwd = Column(String(80))
 
     def __init__(self, usuario, email, passwd):
         self.usuario = usuario
@@ -26,29 +26,29 @@ class User(Base):
         self.passwd = passwd
 
 
-class Marca(db.Model):
+class Marca(Base):
     __tablename__ = 'marca'
-    id = db.Column(db.Integer, primary_key=True)
-    marca = db.Column(db.String(20), unique=True)
-    pais = db.Column(db.String(20))
+    id = Column(Integer, primary_key=True)
+    marca = Column(String(20), unique=True)
+    pais = Column(String(20))
 
     def __init__(self, marca, pais):
         self.marca = marca
         self.pais = pais
 
 
-class Coche(db.Model):
+class Coche(Base):
     __tablename__ = 'coche'
-    id = db.Column(db.Integer, primary_key=True)
-    marca = db.relationship('marca')
-    modelo = db.Column(db.String(30))
-    anyo = db.Column(db.Integer)
-    kilometros = db.Column(db.Integer)
-    combustible = db.Column(db.String)
-    potencia = db.Column(db.Integer)
-    descripcion = db.Column(db.String)
-    precio = db.Column(db.Integer)
-    img = db.Column(db.String)
+    id = Column(Integer, primary_key=True)
+    marca = Column(Integer, ForeignKey('marca.id'))
+    modelo = Column(String(30))
+    anyo = Column(Integer)
+    kilometros = Column(Integer)
+    combustible = Column(String)
+    potencia = Column(Integer)
+    descripcion = Column(String)
+    precio = Column(Integer)
+    img = Column(String)
 
     def __init__(self, marca, modelo, anyo, kilometros, combustible, potencia, descripcion, precio, img):
         self.marca = marca
