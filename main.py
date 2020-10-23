@@ -5,15 +5,14 @@ from sqlalchemy import create_engine, Column, String, Integer, ForeignKey
 from base import Base
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://das:das@localhost/bustomoviles'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost:5432/bustomoviles'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# engine = create_engine('')
 
 # db = SQLAlchemy(app)
 
-class User(Base):
-    __tablename__ = 'user'
+class Usuario(Base):
+    __tablename__ = 'usuario'
 
     id = Column(Integer, primary_key=True)
     usuario = Column(String(20), unique=True)
@@ -60,4 +59,3 @@ class Coche(Base):
         self.descripcion = descripcion
         self.precio = precio
         self.img = img
-
