@@ -95,6 +95,19 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/buscar', methods=['GET'])
+def buscar():
+    marca = request.args.get('marca')
+    modelo = request.args.get('modelo')
+    ciudad = request.args.get('ciudad')
+    combustible = request.args.get('combustible')
+    precio = request.args.get('precio')
+    km = request.args.get('km')
+    print(marca)
+    print(modelo)
+    return render_template("coches.html")
+
+
 @login_manager.user_loader
 def load_user(user_id):
     for user in users:

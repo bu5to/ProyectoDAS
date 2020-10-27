@@ -12,23 +12,22 @@
                 class="form-control"
                 placeholder="Introduce tus palabras clave"
                 name="search"
-                required="required"
               />
               <button type="submit" class="btn search-btn">
                 <span class="fa fa-search"></span>
               </button>
             </div>
             <div class="form-top">
-              <select id="marca">
+              <select id="marca" name="marca">
                 <option>Marca</option>
                 {% for marca in arrMarcas %}
                 <option>{{ marca.marca }}</option>
                 {% endfor %}
               </select>
-              <select id="modelo">
+              <select name="modelo">
                 <option>Modelo</option>
                 {% for m in models %} {% for c in m %}
-                <option class="{{c.marca.marca}}" style="display: none">
+                <option class="{{c.marca.marca}}" style="display: none" value="{{c.modelo}}">
                   {{c.modelo}}
                 </option>
                 {% endfor %} {% endfor %}
@@ -49,24 +48,24 @@
             </div>
 
             <div class="form-top">
-              <select id="ciudad">
+              <select name="ciudad">
                 <option>Todas las ciudades</option>
                 {% for c in ciudades %}
-                <option>{{ c }}</option>
+                <option value=c>{{ c }}</option>
                 {% endfor %}
               </select>
-              <select id="combustible">
+              <select name="combustible">
                 <option>Combustible</option>
                 {% for c in combustibles %}
-                <option>{{ c }}</option>
+                <option value="{{c}}">{{ c }}</option>
                 {% endfor %}
               </select>
             </div>
 
             <div class="form-top">
               <div class="slidecontainer">
-                <p>Precio: <input type="text" id="precioTxt" value=""></input></p>
-                <input id="precio" type="range" min="1" max="50000" value="50" onchange="updateTextInput(this.value);">
+                <p>Precio máximo: <input type="text" id="precioTxt" value=""></input></p>
+                <input name="precio" type="range" min="1" max="50000" value="50000" onchange="updateTextInput(this.value);">
                 <script>
                   function updateTextInput(val) {
           document.getElementById('precioTxt').value=val; 
@@ -74,18 +73,18 @@
                 </script>
               </div>
               
-              <select id="sel6">
+              <select name="km">
                 <option>Kilómetros</option>
-                <option>Menos de 10.000</option>
-                <option>Entre 10.000 y 50.000</option>
-                <option>Entre 50.000 y 100.000</option>
-                <option>Entre 100.000 y 200.000</option>
-                <option>Entre 200.000 y 300.000</option>
-                <option>Más de 300.000</option>
+                <option value="10k">Menos de 10.000</option>
+                <option value="1050k">Entre 10.000 y 50.000</option>
+                <option value="50100k">Entre 50.000 y 100.000</option>
+                <option value="100200k">Entre 100.000 y 200.000</option>
+                <option value="200300k">Entre 200.000 y 300.000</option>
+                <option value="300k">Más de 300.000</option>
               </select>
             </div>
 
-            <button type="submit" class="btn">Submit</button>
+            <a href="{{ url_for('buscar')}}"><button type="submit" class="btn">Buscar</button></a>
           </form>
         </div>
       </div>
@@ -99,7 +98,8 @@
         <h3 class="head">¡Disponibles en las tres provincias!</h3>
         <p class="my-3 head">
           Disponemos de establecimientos en las tres provincias del País Vasco
-          en los que puedes negociar la compra de tu vehículo de ocasión.
+          en los que puedes negociar la compra de tu vehículo de ocasión, concretamente en las capitales:
+          San Sebastián, Bilbao, y Vitoria-Gasteiz.
         </p>
       </div>
       <div class="row mt-3 pt-5">
@@ -111,7 +111,7 @@
               alt=""
             />
             <div class="box-content">
-              <h3 class="title">San Sebastián</h3>
+              <h3 class="title">Donostia - San Sebastián</h3>
               <span class="post">{{nCochesDonos}} vehículos</span>
             </div>
           </div>
@@ -137,7 +137,7 @@
               alt=""
             />
             <div class="box-content">
-              <h3 class="title">Vitoria</h3>
+              <h3 class="title">Vitoria - Gasteiz</h3>
               <span class="post">{{nCochesVito}} vehículos</span>
             </div>
           </div>
