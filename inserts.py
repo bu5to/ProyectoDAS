@@ -10,8 +10,8 @@ Base.metadata.create_all(engine)
 
 session = Session()
 
-u1 = Usuario("jebusto", "jebusto@gmail.com", "pass")
-u2 = Usuario("elpepe", "elpepe@gmail.com", "josemanuel")
+# u1 = Usuario("jebusto", "jebusto@gmail.com", "pass")
+# u2 = Usuario("elpepe", "elpepe@gmail.com", "josemanuel")
 
 m1 = Marca("Ford", "EEUU") 
 m2 = Marca("Mercedes", "Alemania") 

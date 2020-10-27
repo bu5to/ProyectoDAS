@@ -1,12 +1,12 @@
-from flask import Flask, render_template, url_for
-from flask_login import LoginManager, current_user
+from flask import Flask, render_template, url_for, request, redirect
+from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
-from forms import LoginForm
+from forms import LoginForm, SignupForm
 import mysql.connector
 from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, select, func
 from sqlalchemy.orm import relationship
 from base import Base, Session
-from models import Coche, Marca, users
+from models import Coche, Marca, users, User, get_user
 from werkzeug.urls import url_parse
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
 @app.route('/')
-def hello_world():
+def index():
     session = Session()
     query = session.query(Coche)
     query = query.filter(Coche.ciudad == "Donostia")

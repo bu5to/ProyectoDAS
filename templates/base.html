@@ -5,12 +5,11 @@ Author URL: http://w3layouts.com
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Bustomóviles{% block title %} {% endblock %}</title>
-    <!-- web fonts -->
+    <link rel="icon" href="{{url_for ('static', filename='assets/images/icon.png') }}">
     <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
@@ -63,16 +62,20 @@ Author URL: http://w3layouts.com
 		<div class="container">
 	<header class="row">
 		<div class="social-top col-lg-3 col-6">
-			<li>Follow Us</li>
-			<li><a href="#"><span class="fa fa-facebook"></span></a></li>
-			<li><a href="#"><span class="fa fa-instagram"></span></a> </li>
-				<li><a href="#"><span class="fa fa-twitter"></span></a></li>
-				<li><a href="#"><span class="fa fa-vimeo"></span></a> </li>
+			<li>Síguenos</li>
+			<li><a href="https://instagram.com/mazda3jb"><span class="fa fa-instagram"></span></a></li>
+			<li><a href="https://github.com/bu5to"><span class="fa fa-github"></span></a> </li>
 		</div>
 		<div class="accounts col-lg-9 col-6">
-				<li class="top_li"><span class="fa fa-mobile"></span><a href="tel:+142 5897555">+142 5897555</a> </li>
-				<li class="top_li1"><a href="{{ url_for('login')}}">Login</a></li>
-				<li class="top_li2"><a href="#">Register</a></li>
+        <li class="top_li"><span class="fa fa-mobile"></span><a href="tel:+34 943 999 999">+34 943 999 999</a> </li>
+        {% if current_user.is_anonymous %}
+        <li class="top_li1"><span class="fa fa-user"></span><a href="{{ url_for('login')}}">Iniciar sesión</a></li>
+				<li class="top_li2"><a href="{{ url_for('show_signup_form') }}">Registrarse</a></li>
+        {% else %}
+        <li class="top_li1"><span class="fa fa-user"></span>Hola, {{ current_user.name }}</li>
+				<li class="top_li2"><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+        {% endif %}
+				
 		</div>
 		
 	</header>
@@ -84,7 +87,7 @@ Author URL: http://w3layouts.com
   <nav class="navbar navbar-expand-lg navbar-light py-lg-2 py-2">
     <div class="container">
       <!-- <a class="navbar-brand" href="index.html"><span class="fa fa-home"></span> Estate Agent</a> -->
-    <a class="navbar-brand" href="{{ url_for('hello_world') }}">
+    <a class="navbar-brand" href="{{ url_for('index') }}">
         <img src="{{url_for ('static', filename='assets/images/bustomoviles.png') }}" alt="Bustomoviles" title="Bustomoviles" style="height:35px;" />
     </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -95,7 +98,7 @@ Author URL: http://w3layouts.com
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('hello_world') }}">Inicio</a>
+            <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="about.html">Compra</a>
