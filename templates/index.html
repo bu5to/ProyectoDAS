@@ -10,7 +10,7 @@
               <input
                 type="search"
                 class="form-control"
-                placeholder="Enter Location, Property, Landmark"
+                placeholder="Introduce tus palabras clave"
                 name="search"
                 required="required"
               />
@@ -20,43 +20,53 @@
             </div>
             <div class="form-top">
               <select id="sel1">
-                <option>All Actions</option>
-                <option>Rent</option>
-                <option>Sale</option>
-                <option>Sold Out</option>
+                <option>Marca</option>
+                {% for marca in arrMarcas %}
+                <option>{{ marca.marca }}</option>
+                {% endfor %}
               </select>
               <select id="sel2">
-                <option>All Types</option>
-                <option>Apartment</option>
-                <option>Business</option>
-                <option>House</option>
-                <option>Luxury</option>
-                <option>Residential</option>
-                <option>Restaurant</option>
-                <option>Single Family</option>
-                <option>Villa</option>
+                <option>Modelo</option>
+                {% for m in models %}
+                  {% for c in m %}
+                  <option id='{{c.marca.marca}}'>{{c.modelo}}</option>
+                  {% endfor %}
+                {% endfor %}
               </select>
+              <script>
+                var options = "";
+                $("#sel2").on("change", function () {
+                  var value = $(this).val();
+                  alert(value);
+                  if (value == "Male") {
+                    options =
+                      "<option>Select Your Name</option>" +
+                      "<option value='Male1'>Male 1</option>" +
+                      "<option value='Male2'>Male 2</option>";
+                    $("#name").html(options);
+                  } else if (value == "Female") {
+                    options =
+                      "<option>Select Your Name</option>" +
+                      '<option value="female1">Female 1</option>' +
+                      '<option value="female2">Female 2</option>';
+                    $("#name").html(options);
+                  } else $("#name").find("option").remove();
+                });
+              </script>
             </div>
 
             <div class="form-top">
               <select id="sel3">
-                <option>All Cities</option>
-                <option>Baja California Sur</option>
-                <option>Campo Aereo Chapultepec</option>
-                <option>Cuernavaca</option>
-                <option>Estado de</option>
-                <option>Florida</option>
+                <option>Todas las ciudades</option>
+                {% for c in ciudades %}
+                <option>{{ c }}</option>
+                {% endfor %}
               </select>
               <select id="sel4">
-                <option>Min Rooms</option>
-                <option>All Rooms</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
+                <option>Combustible</option>
+                {% for c in combustibles %}
+                <option>{{ c }}</option>
+                {% endfor %}
               </select>
             </div>
 
@@ -98,34 +108,47 @@
       <div class="heading text-center mx-auto">
         <h3 class="head">¡Disponibles en las tres provincias!</h3>
         <p class="my-3 head">
-          Disponemos de establecimientos en las tres provincias del País Vasco en los que puedes negociar la compra de tu vehículo de ocasión.
+          Disponemos de establecimientos en las tres provincias del País Vasco
+          en los que puedes negociar la compra de tu vehículo de ocasión.
         </p>
       </div>
       <div class="row mt-3 pt-5">
         <div class="col-md-4 col-sm-6">
           <div class="box16">
-            <img class="img-fluid" src="{{url_for ('static', filename='assets/images/g1.jpg') }}" alt="" />
+            <img
+              class="img-fluid"
+              src="{{url_for ('static', filename='assets/images/g1.jpg') }}"
+              alt=""
+            />
             <div class="box-content">
               <h3 class="title">San Sebastián</h3>
-              <span class="post">2 Listings</span>
+              <span class="post">{{nCochesDonos}} vehículos</span>
             </div>
           </div>
         </div>
         <div class="col-md-4 col-sm-6">
           <div class="box16">
-            <img class="img-fluid" src="{{url_for ('static', filename='assets/images/g2.jpg') }}" alt="" />
+            <img
+              class="img-fluid"
+              src="{{url_for ('static', filename='assets/images/g2.jpg') }}"
+              alt=""
+            />
             <div class="box-content">
               <h3 class="title">Bilbao</h3>
-              <span class="post">2 Listings</span>
+              <span class="post">{{nCochesBilbo}} vehículos</span>
             </div>
           </div>
         </div>
         <div class="col-md-4 col-sm-6 mt-lg-0 pt-lg-0 mt-md-4 pt-md-2">
           <div class="box16">
-            <img class="img-fluid" src="{{url_for ('static', filename='assets/images/g3.jpg') }}" alt="" />
+            <img
+              class="img-fluid"
+              src="{{url_for ('static', filename='assets/images/g3.jpg') }}"
+              alt=""
+            />
             <div class="box-content">
               <h3 class="title">Vitoria</h3>
-              <span class="post">2 Listings</span>
+              <span class="post">{{nCochesVito}} vehículos</span>
             </div>
           </div>
         </div>
