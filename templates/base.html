@@ -9,7 +9,7 @@ Author URL: http://w3layouts.com
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Bustomóviles</title>
+    <title>Bustomóviles{% block title %} {% endblock %}</title>
     <!-- web fonts -->
     <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
@@ -17,6 +17,42 @@ Author URL: http://w3layouts.com
     <!-- //web fonts -->
     <!-- Template CSS -->
     <link rel="stylesheet" type="text/css" href="{{url_for ('static', filename='assets/css/style-starter.css') }}">
+    <style>
+      .slidecontainer {
+        width: 100%;
+      }
+      
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+      }
+      
+      .slider:hover {
+        opacity: 1;
+      }
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background: #4CAF50;
+        cursor: pointer;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: #4CAF50;
+        cursor: pointer;
+      }
+      </style>
   </head>
   <body>
 
@@ -35,7 +71,7 @@ Author URL: http://w3layouts.com
 		</div>
 		<div class="accounts col-lg-9 col-6">
 				<li class="top_li"><span class="fa fa-mobile"></span><a href="tel:+142 5897555">+142 5897555</a> </li>
-				<li class="top_li1"><a href="#">Login</a></li>
+				<li class="top_li1"><a href="{{ url_for('login')}}">Login</a></li>
 				<li class="top_li2"><a href="#">Register</a></li>
 		</div>
 		
@@ -48,7 +84,7 @@ Author URL: http://w3layouts.com
   <nav class="navbar navbar-expand-lg navbar-light py-lg-2 py-2">
     <div class="container">
       <!-- <a class="navbar-brand" href="index.html"><span class="fa fa-home"></span> Estate Agent</a> -->
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="{{ url_for('hello_world') }}">
         <img src="{{url_for ('static', filename='assets/images/bustomoviles.png') }}" alt="Bustomoviles" title="Bustomoviles" style="height:35px;" />
     </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -59,7 +95,7 @@ Author URL: http://w3layouts.com
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link" href="{{ url_for('hello_world') }}">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="about.html">Compra</a>

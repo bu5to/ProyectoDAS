@@ -3,9 +3,7 @@
 from datetime import date
 
 from base import Session, engine, Base
-from usuario import Usuario
-from marca import Marca
-from coche import Coche
+from models import Usuario, Marca, Coche
 
 
 Base.metadata.create_all(engine)
@@ -16,7 +14,7 @@ u1 = Usuario("jebusto", "jebusto@gmail.com", "pass")
 u2 = Usuario("elpepe", "elpepe@gmail.com", "josemanuel")
 
 m1 = Marca("Ford", "EEUU") 
-m2 = Marca("Mercedes Benz", "EEUU") 
+m2 = Marca("Mercedes", "Alemania") 
 m3 = Marca("BMW", "Alemania") 
 m4 = Marca("Audi", "Alemania") 
 m5 = Marca("Renault", "Francia") 

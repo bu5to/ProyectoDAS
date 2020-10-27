@@ -19,50 +19,43 @@
               </button>
             </div>
             <div class="form-top">
-              <select id="sel1">
+              <select id="marca">
                 <option>Marca</option>
                 {% for marca in arrMarcas %}
                 <option>{{ marca.marca }}</option>
                 {% endfor %}
               </select>
-              <select id="sel2">
+              <select id="modelo">
                 <option>Modelo</option>
-                {% for m in models %}
-                  {% for c in m %}
-                  <option id='{{c.marca.marca}}'>{{c.modelo}}</option>
-                  {% endfor %}
-                {% endfor %}
+                {% for m in models %} {% for c in m %}
+                <option class="{{c.marca.marca}}" style="display: none">
+                  {{c.modelo}}
+                </option>
+                {% endfor %} {% endfor %}
               </select>
               <script>
-                var options = "";
-                $("#sel2").on("change", function () {
-                  var value = $(this).val();
-                  alert(value);
-                  if (value == "Male") {
-                    options =
-                      "<option>Select Your Name</option>" +
-                      "<option value='Male1'>Male 1</option>" +
-                      "<option value='Male2'>Male 2</option>";
-                    $("#name").html(options);
-                  } else if (value == "Female") {
-                    options =
-                      "<option>Select Your Name</option>" +
-                      '<option value="female1">Female 1</option>' +
-                      '<option value="female2">Female 2</option>';
-                    $("#name").html(options);
-                  } else $("#name").find("option").remove();
+                $("#marca").on("focusin", function () {
+                  console.log("Saving value " + $(this).val());
+                  $(this).data("val", $(this).val());
+                });
+
+                $("#marca").on("change", function () {
+                  var prev = $(this).data("val");
+                  var current = $(this).val();
+                  $("." + prev).hide();
+                  $("." + current).show();
                 });
               </script>
             </div>
 
             <div class="form-top">
-              <select id="sel3">
+              <select id="ciudad">
                 <option>Todas las ciudades</option>
                 {% for c in ciudades %}
                 <option>{{ c }}</option>
                 {% endfor %}
               </select>
-              <select id="sel4">
+              <select id="combustible">
                 <option>Combustible</option>
                 {% for c in combustibles %}
                 <option>{{ c }}</option>
@@ -71,27 +64,24 @@
             </div>
 
             <div class="form-top">
-              <select id="sel5">
-                <option>All Bed Rooms</option>
-                <option>Min Bed Rooms</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-              </select>
+              <div class="slidecontainer">
+                <p>Precio: <input type="text" id="precioTxt" value=""></input></p>
+                <input id="precio" type="range" min="1" max="50000" value="50" onchange="updateTextInput(this.value);">
+                <script>
+                  function updateTextInput(val) {
+          document.getElementById('precioTxt').value=val; 
+        }
+                </script>
+              </div>
+              
               <select id="sel6">
-                <option>All Baths</option>
-                <option>Min Baths</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
+                <option>Kilómetros</option>
+                <option>Menos de 10.000</option>
+                <option>Entre 10.000 y 50.000</option>
+                <option>Entre 50.000 y 100.000</option>
+                <option>Entre 100.000 y 200.000</option>
+                <option>Entre 200.000 y 300.000</option>
+                <option>Más de 300.000</option>
               </select>
             </div>
 
