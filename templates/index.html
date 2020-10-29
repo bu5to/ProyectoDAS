@@ -50,8 +50,8 @@
             <div class="form-top">
               <select name="ciudad">
                 <option>Todas las ciudades</option>
-                {% for c in ciudades %}
-                <option value=c>{{ c }}</option>
+                {% for ciu in ciudades %}
+                <option value="{{ciu}}">{{ ciu }}</option>
                 {% endfor %}
               </select>
               <select name="combustible">

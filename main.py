@@ -2,11 +2,13 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from forms import LoginForm, SignupForm
-from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, select, func
+from sqlalchemy import create_engine, and_, Column, String, Integer, ForeignKey, select, func
 from sqlalchemy.orm import relationship
 from base import Base, Session
 from models import Coche, Marca, users, User, get_user
 from werkzeug.urls import url_parse
+import numpy as np
+import functools
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost:5432/bustomoviles'
@@ -96,7 +98,67 @@ def logout():
 
 @app.route('/buscar', methods=['GET', 'POST'])
 def buscar():
-    print(request.form['marca'])
+    if request.form['marca'] != 'Marca':
+        marca=request.form['marca']
+    else:
+        marca=''
+    if request.form['modelo'] != 'Modelo':
+        modelo=request.form['modelo']
+    else:
+        modelo=''
+    if request.form['ciudad'] != 'Todas las ciudades':
+        ciudad=request.form['ciudad']
+    else:
+        ciudad=''
+    if request.form['combustible'] != 'Combustible':
+        combustible=request.form['combustible']
+    else:
+        combustible=''
+    precio = request.form['precio']
+    if request.form['km'] != 'Kilómetros':
+        km=request.form['km']
+    else:
+        km = ''
+    resultados =[]
+    session = Session()
+    # qMarca = session.query(Coche)
+    # qMarca = qMarca.filter(Coche.marca.marca == marca).all()
+    qModelo = session.query(Coche)
+    if modelo != '':
+        qModelo = qModelo.filter(Coche.modelo == modelo).all()
+    else:
+        qModelo = qModelo.all()
+    qCiudad = session.query(Coche)
+    if ciudad != '':
+        qCiudad = qCiudad.filter(Coche.ciudad == ciudad).all()
+    else: 
+        qCiudad = qCiudad.all()
+    qCombustible = session.query(Coche)
+    if combustible != '':
+        qCombustible = qCombustible.filter(Coche.combustible == ciudad).all()
+    else:
+        qCombustible = qCombustible.all()
+    qPrecio = session.query(Coche)
+    qPrecio = qPrecio.filter(Coche.precio < precio).all()
+    qKm = session.query(Coche)
+    if km == '10k':
+        qKm = qKm.filter(Coche.km < 10000).all()
+    elif km == '1050k':
+        qKm = qKm.filter(and_(Coche.km > 10000, Coche.km<50000)).all()
+    elif km == '50100k':
+        qKm = qKm.filter(and_(Coche.km > 50000, Coche.km<100000)).all()
+    elif km == '100200k':
+        qKm = qKm.filter(and_(Coche.km > 100000, Coche.km<200000)).all()
+    elif km == '200300k':
+        qKm = qKm.filter(and_(Coche.km > 200000, Coche.km<300000)).all()
+    elif km == '200300k':
+        qKm = qKm.filter(Coche.km > 300000).all()
+    else:
+        qKm = qKm.all()
+    resultados = list(set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm))
+    #resultados = np.logical_and(qMarca, qModelo, qCiudad, qCombustible, qPrecio, qKm)
+    for e in resultados:
+        print(e.modelo)
     #print(request.form.get['marca'])
     #print(request.form.get('modelo'))
     # marca = request.form['marca']
@@ -107,7 +169,7 @@ def buscar():
     # km = request.form['km']
     # print(marca)
     # print(modelo)
-    return render_template("coches.html")
+    return render_template("coches.html", busqueda = resultados)
 
 
 @login_manager.user_loader
