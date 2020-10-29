@@ -9,14 +9,24 @@ from models import Coche, Marca, users, User, get_user
 from werkzeug.urls import url_parse
 import numpy as np
 import functools
+from flask_mail import Mail, Message
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost:5432/bustomoviles'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'bu5t0m0viles@gmail.com'
+app.config['MAIL_PASSWORD'] = 'joseaspasromano'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
+mail = Mail(app)
+
 
 @app.route('/', methods=['GET'])
 def index():
@@ -61,6 +71,13 @@ def index():
             models=models
             )
     
+@app.route("/enviar", methods=['GET', 'POST'])
+def enviar():
+    mensaje = "¡Hola, " + request.form['nombre'] + "! Esta es una copia automática de tu sugerencia generada por Bustomóviles. ¡Te responderemos en breve!\n" + request.form['mensaje'] + "\n Un cordial saludo,\n Jorge El Busto - Fundador de Bustomóviles"
+    msg = Message('Bustomóviles - Copia de tu mensaje', sender = 'bu5t0m0viles@gmail.com', recipients = [request.form['email']])
+    msg.body = mensaje
+    mail.send(msg)
+    return redirect("contact")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -128,7 +145,10 @@ def buscar():
     resultados =[]
     session = Session()
     qMarca = session.query(Coche).join(Marca)
-    qMarca = qMarca.filter(Marca.marca == marca).all()
+    if marca != '':
+        qMarca = qMarca.filter(Marca.marca == marca).all()
+    else:
+        qMarca = qMarca.all()
     qModelo = session.query(Coche)
     if modelo != '':
         qModelo = qModelo.filter(Coche.modelo == modelo).all()
@@ -161,22 +181,26 @@ def buscar():
         qKm = qKm.filter(Coche.kilometros > 300000).all()
 
     
-    # if request.form['potMinima'] == '':
-    #     potMinima = 0
-    # else:
-    #     potMinima = request.form['potMinima']
-    # print(potMinima)
-    # if request.form['potMaxima'] == '':
-    #     potMaxima = 1600
-    # else:
-    #     potMaxima = request.form['potMaxima']
-    # print(potMaxima)
-    # qPot = session.query(Coche)
-    # qPot = qPot.filter(and_(Coche.potencia > potMinima, Coche.potencia < potMaxima)).all()
+    if request.form['potMinima'] == '':
+        potMinima = 0
+    else:
+        potMinima = request.form['potMinima']
+    print(potMinima)
+    if request.form['potMaxima'] == '':
+        potMaxima = 1600
+    else:
+        potMaxima = request.form['potMaxima']
+    print(potMaxima)
+    qPot = session.query(Coche)
+    qPot = qPot.filter(and_(Coche.potencia >= potMinima, Coche.potencia <= potMaxima)).all()
+    print(qPot)
 
-    resultados = list(set(qMarca) & set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm))
+    resultados = list(set(qMarca) & set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm) & set(qPot))
     return render_template("coches.html", busqueda = resultados)
 
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
 
 @login_manager.user_loader
 def load_user(user_id):
