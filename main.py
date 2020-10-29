@@ -2,7 +2,6 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from forms import LoginForm, SignupForm
-import mysql.connector
 from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, select, func
 from sqlalchemy.orm import relationship
 from base import Base, Session
@@ -17,7 +16,7 @@ app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     session = Session()
     query = session.query(Coche)
@@ -44,16 +43,16 @@ def index():
     models = []
     for m in marcas:
         models.append(query.filter(Coche.marca == m).all())
-    
     return render_template("index.html", nCochesDonos=nCochesdonos, 
-    nCochesBilbo=nCochesbilbo, 
-    nCochesVito=nCochesvito, 
-    arrCoches=coches, 
-    arrMarcas=marcas, 
-    ciudades=ciudades, 
-    combustibles=combustibles,
-    models=models
-    )
+            nCochesBilbo=nCochesbilbo, 
+            nCochesVito=nCochesvito, 
+            arrCoches=coches, 
+            arrMarcas=marcas, 
+            ciudades=ciudades, 
+            combustibles=combustibles,
+            models=models
+            )
+    
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -95,16 +94,19 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/buscar', methods=['GET'])
+@app.route('/buscar', methods=['GET', 'POST'])
 def buscar():
-    marca = request.args.get('marca')
-    modelo = request.args.get('modelo')
-    ciudad = request.args.get('ciudad')
-    combustible = request.args.get('combustible')
-    precio = request.args.get('precio')
-    km = request.args.get('km')
-    print(marca)
-    print(modelo)
+    print(request.form['marca'])
+    #print(request.form.get['marca'])
+    #print(request.form.get('modelo'))
+    # marca = request.form['marca']
+    # modelo = request.form['modelo']
+    # ciudad = request.form['ciudad']
+    # combustible = request.form['combustible']
+    # precio = request.form['precio']
+    # km = request.form['km']
+    # print(marca)
+    # print(modelo)
     return render_template("coches.html")
 
 

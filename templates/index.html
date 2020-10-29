@@ -5,7 +5,7 @@
       <div class="grid grid-column-2">
         <div class="column2"></div>
         <div class="column1">
-          <form action="/" method="Get">
+          <form action="/buscar" method="POST">
             <div class="blog-search form d-flex search-form">
               <input
                 type="search"
@@ -27,7 +27,7 @@
               <select name="modelo">
                 <option>Modelo</option>
                 {% for m in models %} {% for c in m %}
-                <option class="{{c.marca.marca}}" style="display: none" value="{{c.modelo}}">
+                <option class="{{c.marca.marca}}" style="display: none" name="{{c.modelo}}" value="{{c.modelo}}">
                   {{c.modelo}}
                 </option>
                 {% endfor %} {% endfor %}
@@ -68,8 +68,8 @@
                 <input name="precio" type="range" min="1" max="50000" value="50000" onchange="updateTextInput(this.value);">
                 <script>
                   function updateTextInput(val) {
-          document.getElementById('precioTxt').value=val; 
-        }
+                      document.getElementById('precioTxt').value=val; 
+                      }
                 </script>
               </div>
               
@@ -84,7 +84,10 @@
               </select>
             </div>
 
-            <a href="{{ url_for('buscar')}}"><button type="submit" class="btn">Buscar</button></a>
+            <!-- <a href="{{ url_for('buscar')}}" type="submit" class="btn search-btn" style="background:#02ad88"> -->
+              <input type="submit" class="btn search-btn" style="background:#02ad88"><span class="fa fa-search"></span></button>
+              
+            <!-- </a> -->
           </form>
         </div>
       </div>
