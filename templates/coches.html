@@ -24,11 +24,14 @@
           </ul>
           <div class="info-bg">
             <h5><a href="#">{{c.marca.marca}} {{c.modelo}}</a></h5>
-            <p>{{c.precio}} €</p>
+            <p style="text-align:justify"> {{c.descripcion}} </p>
+            <h6>{{c.precio}} €</h6>
             <ul>
-              <li><i class="fas fa-gas-pump"></i> {{c.combustible}}</li>
-              <li><i class="fas fa-car-side"></i> {{c.kilometros}} kilómetros</li>
-              <li><i class="fas fa-home"></i> {{c.ciudad}}</li>
+              <li><i class="fas fa-gas-pump" style='color:#4CAF50'></i> {{c.combustible}}</li>
+              <li><i class="fas fa-tachometer-alt" style='color:#4CAF50'></i> {{c.kilometros}} kilómetros</li>
+              <br>
+              <li><i class="fas fa-city" style='color:#4CAF50'></i> {{c.ciudad}}</li>
+              <li><i class="fas fa-bolt" style='color:#4CAF50'></i> {{c.potencia}} CV</li>
             </ul>
           </div>
         </div>

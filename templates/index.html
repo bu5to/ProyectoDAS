@@ -84,8 +84,14 @@
               </select>
             </div>
 
-            <!-- <a href="{{ url_for('buscar')}}" type="submit" class="btn search-btn" style="background:#02ad88"> -->
-              <input type="submit" class="btn search-btn" style="background:#02ad88"><span class="fa fa-search"></span></button>
+            <div class="form-top">
+              <input type="text" placeholder="Potencia mínima" name="potMinima">
+              <input type="text" placeholder="Potencia máxima" name="potMaxima">
+              <br>
+            </div>
+              <div style="background:#02ad88">
+                <input type="submit" class="btn search-btn" value="Buscar" style="color:white;background:#02ad88"><span class="fa fa-search" style="color:white"></span></input>
+              </div>
               
             <!-- </a> -->
           </form>

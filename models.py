@@ -1,7 +1,7 @@
 from base import Base
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy import create_engine, Column, String, Integer, ForeignKey
+from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 
 class Coche(Base):
@@ -31,7 +31,13 @@ class Coche(Base):
         self.ciudad = ciudad
         self.img = img
 
-class User(UserMixin):
+class User(Base, UserMixin):
+    __tablename__='user'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String)
+    password = Column(String)
+    is_admin = Column(Boolean)
     def __init__(self, id, name, email, password, is_admin=False):
         self.id = id
         self.name = name

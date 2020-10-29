@@ -44,7 +44,13 @@ def index():
     query = session.query(Coche)
     models = []
     for m in marcas:
-        models.append(query.filter(Coche.marca == m).all())
+        models.append(query.filter(Coche.marca == m).all())   
+    #sinduplicados = []
+
+    # for mod in models:
+    #     if mod.modelo not in sinduplicados:
+    #         sinduplicados.append(mod)
+
     return render_template("index.html", nCochesDonos=nCochesdonos, 
             nCochesBilbo=nCochesbilbo, 
             nCochesVito=nCochesvito, 
@@ -121,8 +127,8 @@ def buscar():
         km = ''
     resultados =[]
     session = Session()
-    # qMarca = session.query(Coche)
-    # qMarca = qMarca.filter(Coche.marca.marca == marca).all()
+    qMarca = session.query(Coche).join(Marca)
+    qMarca = qMarca.filter(Marca.marca == marca).all()
     qModelo = session.query(Coche)
     if modelo != '':
         qModelo = qModelo.filter(Coche.modelo == modelo).all()
@@ -142,33 +148,33 @@ def buscar():
     qPrecio = qPrecio.filter(Coche.precio < precio).all()
     qKm = session.query(Coche)
     if km == '10k':
-        qKm = qKm.filter(Coche.km < 10000).all()
+        qKm = qKm.filter(Coche.kilometros < 10000).all()
     elif km == '1050k':
-        qKm = qKm.filter(and_(Coche.km > 10000, Coche.km<50000)).all()
+        qKm = qKm.filter(and_(Coche.kilometros > 10000, Coche.kilometros<50000)).all()
     elif km == '50100k':
-        qKm = qKm.filter(and_(Coche.km > 50000, Coche.km<100000)).all()
+        qKm = qKm.filter(and_(Coche.kilometros > 50000, Coche.kilometros<100000)).all()
     elif km == '100200k':
-        qKm = qKm.filter(and_(Coche.km > 100000, Coche.km<200000)).all()
+        qKm = qKm.filter(and_(Coche.kilometros > 100000, Coche.kilometros<200000)).all()
     elif km == '200300k':
-        qKm = qKm.filter(and_(Coche.km > 200000, Coche.km<300000)).all()
-    elif km == '200300k':
-        qKm = qKm.filter(Coche.km > 300000).all()
-    else:
-        qKm = qKm.all()
-    resultados = list(set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm))
-    #resultados = np.logical_and(qMarca, qModelo, qCiudad, qCombustible, qPrecio, qKm)
-    for e in resultados:
-        print(e.modelo)
-    #print(request.form.get['marca'])
-    #print(request.form.get('modelo'))
-    # marca = request.form['marca']
-    # modelo = request.form['modelo']
-    # ciudad = request.form['ciudad']
-    # combustible = request.form['combustible']
-    # precio = request.form['precio']
-    # km = request.form['km']
-    # print(marca)
-    # print(modelo)
+        qKm = qKm.filter(and_(Coche.kilometros > 200000, Coche.kilometros<300000)).all()
+    elif km == '300k':
+        qKm = qKm.filter(Coche.kilometros > 300000).all()
+
+    
+    # if request.form['potMinima'] == '':
+    #     potMinima = 0
+    # else:
+    #     potMinima = request.form['potMinima']
+    # print(potMinima)
+    # if request.form['potMaxima'] == '':
+    #     potMaxima = 1600
+    # else:
+    #     potMaxima = request.form['potMaxima']
+    # print(potMaxima)
+    # qPot = session.query(Coche)
+    # qPot = qPot.filter(and_(Coche.potencia > potMinima, Coche.potencia < potMaxima)).all()
+
+    resultados = list(set(qMarca) & set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm))
     return render_template("coches.html", busqueda = resultados)
 
 
