@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block title %} - Búsqueda {% endblock %}{% block content %}
+{% extends 'base.html' %} {% block title %} - Búsqueda {% endblock %}
+{% block head %}
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+{% endblock %}
+{% block content %}
 
 <section class="grids-4" id="properties">
   <div id="grids4-block" class="py-5">
@@ -10,7 +14,26 @@
         </p>
       </div>
       <div class="row mt-5 pt-3">
+        {% for c in busqueda %}
         <div class="grids4-info col-lg-4 col-md-6">
+          <a href="#"
+            ><img src="{{c.img}}" class="img-fluid" alt=""
+          /></a>
+          <ul class="location-top">
+            <li class="open-1">En venta</li>
+          </ul>
+          <div class="info-bg">
+            <h5><a href="#">{{c.marca.marca}} {{c.modelo}}</a></h5>
+            <p>{{c.precio}} €</p>
+            <ul>
+              <li><i class="fas fa-gas-pump"></i> {{c.combustible}}</li>
+              <li><i class="fas fa-car-side"></i> {{c.kilometros}} kilómetros</li>
+              <li><i class="fas fa-home"></i> {{c.ciudad}}</li>
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- <div class="grids4-info col-lg-4 col-md-6">
           <a href="#"
             ><img src="assets/images/g7.jpg" class="img-fluid" alt=""
           /></a>
@@ -27,26 +50,8 @@
               <li><span class="fa fa-share-square-o"></span> 1200 sq ft</li>
             </ul>
           </div>
-        </div>
-        <div class="grids4-info col-lg-4 col-md-6">
-          <a href="#"
-            ><img src="assets/images/g7.jpg" class="img-fluid" alt=""
-          /></a>
-          <ul class="location-top">
-            <li class="rent">For Rent</li>
-            <li class="open-1">Open House</li>
-          </ul>
-          <div class="info-bg">
-            <h5><a href="#">Luxury Apartment In chelsea</a></h5>
-            <p>$ 450,000 $777 / sqft</p>
-            <ul>
-              <li><span class="fa fa-bed"></span> 4 Beds</li>
-              <li><span class="fa fa-bath"></span> 3 Baths</li>
-              <li><span class="fa fa-share-square-o"></span> 1200 sq ft</li>
-            </ul>
-          </div>
-        </div>
-        <div class="grids4-info col-lg-4 col-md-6 mt-md-0 mt-5">
+        </div> -->
+        <!-- <div class="grids4-info col-lg-4 col-md-6 mt-md-0 mt-5">
           <a href="#"
             ><img src="assets/images/g8.jpg" class="img-fluid" alt=""
           /></a>
@@ -135,7 +140,7 @@
               <li><span class="fa fa-share-square-o"></span> 1200 sq ft</li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
