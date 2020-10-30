@@ -218,6 +218,11 @@ def buscar():
 def contact():
     return render_template("contact.html")
 
+@app.route('/vender')
+def vender():
+    return render_template("vender.html")
+
+
 @login_manager.user_loader
 def load_user(user_id):
     for user in users:
