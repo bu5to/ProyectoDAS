@@ -5,7 +5,7 @@ from forms import LoginForm, SignupForm
 from sqlalchemy import create_engine, and_, Column, String, Integer, ForeignKey, select, func
 from sqlalchemy.orm import relationship
 from base import Base, Session
-from models import Coche, Marca, users, User, get_user
+from models import Coche, Marca, users, User, get_user, Comentario
 from werkzeug.urls import url_parse
 import numpy as np
 import functools
@@ -45,6 +45,8 @@ def index():
     nCochesvito = query.scalar()
     query = session.query(Coche)
     coches = query.all()
+    query = session.query(Comentario)
+    comentarios = query.all()
     query = session.query(Marca)
     marcas = query.all()
     query = session.query(Coche.ciudad.distinct().label("ciudad"))
@@ -68,16 +70,30 @@ def index():
             arrMarcas=marcas, 
             ciudades=ciudades, 
             combustibles=combustibles,
-            models=models
+            models=models,
+            comentarios=comentarios
             )
     
 @app.route("/enviar", methods=['GET', 'POST'])
 def enviar():
-    mensaje = "¡Hola, " + request.form['nombre'] + "! Esta es una copia automática de tu sugerencia generada por Bustomóviles. ¡Te responderemos en breve!\n" + request.form['mensaje'] + "\n Un cordial saludo,\n Jorge El Busto - Fundador de Bustomóviles"
-    msg = Message('Bustomóviles - Copia de tu mensaje', sender = 'bu5t0m0viles@gmail.com', recipients = [request.form['email']])
-    msg.body = mensaje
-    mail.send(msg)
-    return redirect("contact")
+    value = request.form['copia'] 
+    strmensaje = request.form['mensaje']
+    dest = request.form['email']
+    nombre = request.form['nombre']
+    if (strmensaje!='' and nombre!=''):
+        sesEmail = Session()
+        co = Comentario(nombre, strmensaje)
+        sesEmail.add(co)
+        sesEmail.commit()
+        sesEmail.close()
+    if value == "Sí":
+        mensaje = "¡Hola, " + nombre + "! Esta es una copia automática de tu sugerencia generada por Bustomóviles. ¡Te responderemos en breve!\n" + strmensaje + "\n Un cordial saludo,\n Jorge El Busto - Fundador de Bustomóviles"
+        msg = Message('Bustomóviles - Copia de tu mensaje', sender = 'bu5t0m0viles@gmail.com', recipients = [dest])
+        msg.body = mensaje
+        mail.send(msg)
+        return redirect("contact")
+    else:
+        return redirect("contact")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -68,3 +68,13 @@ class Marca(Base):
     def __init__(self, marca, pais):
         self.marca = marca
         self.pais = pais
+
+class Comentario(Base):
+    __tablename__ = 'comentario'
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String)
+    comentario = Column(String)
+
+    def __init__(self, nombre, comentario):
+        self.nombre = nombre
+        self.comentario = comentario

@@ -3,15 +3,23 @@
 from datetime import date
 
 from base import Session, engine, Base
-from models import Usuario, Marca, Coche
+from models import User, Marca, Coche, Comentario
 
+Base.metadata.drop_all(bind=engine, tables=[Coche.__table__])
+Base.metadata.drop_all(bind=engine, tables=[Marca.__table__])
+Base.metadata.drop_all(bind=engine, tables=[User.__table__])
+Base.metadata.drop_all(bind=engine, tables=[Comentario.__table__])
 
 Base.metadata.create_all(engine)
 
 session = Session()
 
-# u1 = Usuario("jebusto", "jebusto@gmail.com", "pass")
-# u2 = Usuario("elpepe", "elpepe@gmail.com", "josemanuel")
+u1 = User(1, "Jorge El Busto", "jebusto@gmail.com", "pass", True)
+
+co1 = Comentario("Juan Pablo Nguema", "He vendido mi Fiat Uno Turbo en Bustomóviles y he de decir que son unos auténticos profesionales.")
+co2 = Comentario("Javier Clemente", "Estaba buscando algún lado en el que vender mi gabarra por falta de uso. Aquí no me la aceptaron, pero se quedaron con mi Mercedes.")
+co3 = Comentario("Elon Musk", "Compré aquí un Land Rover Defender de 1990 para utilizarlo como base del Tesla Cybertruck. Salió bien.")
+co4 = Comentario("Francesco Virgolini", "Me compré aquí un Alfa Romeo Giulia Quadrivoglio y es un coche que va de cine.")
 
 m1 = Marca("Ford", "EEUU") 
 m2 = Marca("Mercedes", "Alemania") 
@@ -43,7 +51,11 @@ c19 = Coche(m7, "Supra", 1988, 129000, "Gasolina", 238, "Toyota Supra, motor 3.0
 c20 = Coche(m7, "Prius", 2007, 150000, "Híbrido", 112, " Vehículo con distintivo ambiental eco en estado impecable equipado con los extras normales de este modelo", 6090, "Bilbao", "https://www.km77.com/media/fotos/toyota_prius_2006_2093_2.jpg")
 
 session.add(u1)
-session.add(u2)
+
+session.add(co1)
+session.add(co2)
+session.add(co3)
+session.add(co4)
 
 session.add(m1)
 session.add(m2)
