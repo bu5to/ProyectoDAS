@@ -14,41 +14,31 @@
 		
 		<div class="form-41-mian py-5">
 			<div class="container py-md-3">
-        <h3 class="cont-head">Déjanos tu sugerencia</h3>
-        <h6>Recuerda ser constructivo y no utilizar lenguaje soez.</h6>
+        <h3 class="cont-head">Datos del coche a vender</h3>
 				<div class="d-grid align-form-map">
 					<div class="form-inner-cont">
-						<form action="/enviar" method="POST" class="main-input">
+						<form action="/vender" method="POST" class="main-input">
 							<div class="top-inputs d-grid">
-								<input type="text" placeholder="Nombre y apellidos" name="nombre" id="w3lName" required="">
-								<input type="email" name="email" placeholder="Correo electrónico" id="w3lSender" required="">
+								<input type="text" placeholder="Marca" name="marca" id="marca" required="">
+								<input type="text" placeholder="País de la marca" name="pais" id="pais" required="">
+								<input type="text" placeholder="Modelo" name="modelo" id="modelo" required="">
+								<input type="number" placeholder="Año" name="anyo" id="anyo" required="">
+								<input type="text" placeholder="Combustible" name="combustible" id="combustible" required="">
+								<input type="number" placeholder="Potencia" name="potencia" id="potencia" required="">
+								<input type="number" placeholder="Kilómetros" name="kilometros" id="kilometros" required="">
+								<input type="number" placeholder="Precio" name="precio" id="precio" required="">
+								<input type="text" placeholder="Imagen (URL)" name="img" id="img" required="">
+								<select id="ciudad" name="ciudad">
+									<option>Donostia</option>
+									<option>Bilbao</option>
+									<option>Vitoria</option>
+								</select>
 							</div>
-							<textarea placeholder="Mensaje" onchange="filtro()" id="mensaje" name="mensaje" required=""></textarea>
-							<label for='copia'>¿Deseas recibir una copia por correo electrónico?</label>
-							<select name='copia'>
-								<option name="Sí" value="Sí">
-									Sí
-								</option>
-								<option name="No" value="No">
-									No
-								</option>
-							</select>
+							<textarea placeholder="Descripción" id="descripcion" name="descripcion" required=""></textarea>
 							<div class="text-right">
-								<button type="submit" class="btn btn-theme3" onclick="filtro()">Enviar</button>
+								<button type="submit" class="btn btn-theme3">Vender</button>
               </div>
-              <script>
-                function filtro() {
-                  var mensaje = document.getElementById("mensaje").value;
-                  var lengSoez = ["puta", "puto", "mierda", "gilipollas", "subnormal", "asco", "polla", "coño", "capullo", "cabrón"];
-                  for (i in lengSoez){
-                    let palabra = lengSoez[i]
-                    if (mensaje.includes(palabra)){
-                      alert("NOTA: No utilices lenguaje soez. Aceptamos críticas constructivas, no destructivas.")
-                    }
-                  }
-                }
-                </script>
-						</form>
+		</form>
 					</div>
 					
 					<div class="contact-right">
@@ -57,32 +47,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="contant11-top-bg py-5">
-			<div class="container py-md-3">
-				<div class="d-grid contact section-gap">
-					<div class="contact-info-left d-grid text-center">
-						<div class="contact-info">
-							<span class="fa fa-location-arrow" aria-hidden="true"></span>
-							<h4>Estamos en...</h4>
-							<p>Paseo del Duque de Baena, 999, 20009 San Sebastián</p>
-						</div>
-						<div class="contact-info">
-							<span class="fa fa-phone" aria-hidden="true"></span>
-							<h4>Llámanos</h4>
-							<p><a href="tel:+34 943 999 999">+34 943 999 999</a></p>
-						</div>
-						<div class="contact-info">
-							<span class="fa fa-envelope-open-o" aria-hidden="true"></span>
-							<h4>Escríbenos</h4>
-							<p><a href="mailto:info@bustomoviles.com" class="email">info@bustomoviles.com</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="map">
-            <iframe src="https://maps.google.com/maps?q=paseo%20del%20duque%20de%20baena&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-        </div>
 </section>
 <!-- //contact form -->
  

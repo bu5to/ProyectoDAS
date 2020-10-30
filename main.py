@@ -201,26 +201,60 @@ def buscar():
         potMinima = 0
     else:
         potMinima = request.form['potMinima']
-    print(potMinima)
     if request.form['potMaxima'] == '':
         potMaxima = 1600
     else:
         potMaxima = request.form['potMaxima']
-    print(potMaxima)
     qPot = session.query(Coche)
     qPot = qPot.filter(and_(Coche.potencia >= potMinima, Coche.potencia <= potMaxima)).all()
-    print(qPot)
 
-    resultados = list(set(qMarca) & set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm) & set(qPot))
+    if request.form['anodesde'] == '':
+        anoDesde = 1900
+    else:
+        anoDesde = request.form['anodesde']
+    if request.form['anohasta'] == '':
+        anoHasta = 2021
+    else:
+        anoHasta = request.form['anohasta']
+    qAnyo = session.query(Coche)
+    qAnyo = qAnyo.filter(and_(Coche.anyo >= anoDesde, Coche.anyo <= anoHasta)).all()
+
+    resultados = list(set(qMarca) & set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm) & set(qPot) & set(qAnyo))
     return render_template("coches.html", busqueda = resultados)
 
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
 
-@app.route('/vender')
+@app.route('/vender', methods=['GET', 'POST'])
 def vender():
-    return render_template("vender.html")
+    if request.method == 'POST':
+        strMarca = request.form['marca']
+        strPais = request.form['pais']
+        session = Session()
+        qMarca = session.query(Marca)
+        qMarca = qMarca.filter(Marca.marca == strMarca).all()
+        if len(qMarca) == 0:
+            newMarca = Marca(strMarca, strPais)
+            session.add(newMarca)
+        else:
+            newMarca = qMarca[0]
+        modelo = request.form['modelo']
+        anyo = request.form['anyo']
+        combustible = request.form['combustible']
+        potencia = request.form['potencia']
+        kilometros = request.form['kilometros']
+        precio = request.form['precio']
+        ciudad = request.form['ciudad']
+        img = request.form['img']
+        descripcion = request.form['descripcion']
+        coche = Coche(newMarca, modelo, anyo, kilometros, combustible, potencia, descripcion, precio, ciudad, img)
+        session.add(coche)
+        session.commit()
+        session.close()
+        return render_template("vender.html")
+    else:
+        return render_template("vender.html")
 
 
 @login_manager.user_loader
