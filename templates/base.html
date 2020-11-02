@@ -6,7 +6,7 @@ Author URL: http://w3layouts.com
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
     <title>Bustomóviles{% block title %} {% endblock %}</title>
     <link rel="icon" href="{{url_for ('static', filename='assets/images/icon.png') }}">
@@ -67,14 +67,14 @@ Author URL: http://w3layouts.com
 			<li><a href="https://instagram.com/mazda3jb"><span class="fa fa-instagram"></span></a></li>
 			<li><a href="https://github.com/bu5to"><span class="fa fa-github"></span></a> </li>
 		</div>
-		<div class="accounts col-lg-9 col-6">
+		<div class="accounts col-lg-9 col-12">
         <li class="top_li"><span class="fa fa-mobile"></span><a href="tel:+34 943 999 999">+34 943 999 999</a> </li>
         {% if current_user.is_anonymous %}
-        <li class="top_li1"><span class="fa fa-user"></span><a href="{{ url_for('login')}}">Iniciar sesión</a></li>
-				<li class="top_li2"><a href="{{ url_for('show_signup_form') }}">Registrarse</a></li>
+        <li class="top_li"><span class="fa fa-user"></span><a href="{{ url_for('login')}}">Iniciar sesión</a></li>
+				<li class="top_li"><a href="{{ url_for('show_signup_form') }}">Registrarse</a></li>
         {% else %}
-        <li class="top_li1"><span class="fa fa-user"></span>Hola, {{ current_user.name }}</li>
-				<li class="top_li2"><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+        <li class="top_li"><span class="fa fa-user"></span>Hola, {{ current_user.name }}</li>
+				<li class="top_li"><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
         {% endif %}
 				
 		</div>
