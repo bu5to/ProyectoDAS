@@ -136,6 +136,12 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/coche/<int:coche_id>')
+def coche(coche_id):  
+    query = session.query(Coche)
+    query = query.filter(Coche.id==coche_id).first()
+    return render_template("coche.html", coche = query)
+
 @app.route('/buscar', methods=['GET', 'POST'])
 def buscar():
     if request.form['marca'] != 'Marca':
@@ -229,41 +235,49 @@ def contact():
 
 @app.route('/vender', methods=['GET', 'POST'])
 def vender():
-    sesQuery = Session()
-    query = sesQuery.query(Marca)
-    paises = [row.pais for row in query.distinct(Marca.pais)]
-    marcas = [row.marca for row in query.all()]
-    print(marcas)
-    print(paises)
-    sesQuery.close()
-    if request.method == 'POST':
-        strMarca = request.form['marca']
-        strPais = request.form['pais']
-        session = Session()
-        qMarca = session.query(Marca)
-        qMarca = qMarca.filter(Marca.marca == strMarca).all()
-        if len(qMarca) == 0:
-            newMarca = Marca(strMarca, strPais)
-            session.add(newMarca)
+    if current_user.is_authenticated:
+        sesQuery = Session()
+        query = sesQuery.query(Marca)
+        paises = [row.pais for row in query.distinct(Marca.pais)]
+        marcas = [row.marca for row in query.all()]
+        print(marcas)
+        print(paises)
+        sesQuery.close()
+        if request.method == 'POST':
+            strMarca = request.form['marca']
+            if strMarca == '':
+                print("No lo coge")
+                strMarca = request.form['marcaselect']
+            strPais = request.form['pais']
+            if strPais == '':
+                strPais = request.form['paisselect']
+            session = Session()
+            qMarca = session.query(Marca)
+            qMarca = qMarca.filter(Marca.marca == strMarca).all()
+            if len(qMarca) == 0:
+                newMarca = Marca(strMarca, strPais)
+                session.add(newMarca)
+            else:
+                newMarca = qMarca[0]
+            modelo = request.form['modelo']
+            anyo = request.form['anyo']
+            combustible = request.form['combustible']
+            potencia = request.form['potencia']
+            kilometros = request.form['kilometros']
+            precio = int(round(int(request.form['precio']) * 1.1))
+            ciudad = request.form['ciudad']
+            img = request.form['img']
+            descripcion = request.form['descripcion']
+            coche = Coche(newMarca, modelo, anyo, kilometros, combustible, potencia, descripcion, precio, ciudad, img)
+            session.add(coche)
+            session.commit()
+            session.close()
+            
+            return render_template("vender.html", marcas=marcas, paises=paises)
         else:
-            newMarca = qMarca[0]
-        modelo = request.form['modelo']
-        anyo = request.form['anyo']
-        combustible = request.form['combustible']
-        potencia = request.form['potencia']
-        kilometros = request.form['kilometros']
-        precio = request.form['precio']
-        ciudad = request.form['ciudad']
-        img = request.form['img']
-        descripcion = request.form['descripcion']
-        coche = Coche(newMarca, modelo, anyo, kilometros, combustible, potencia, descripcion, precio, ciudad, img)
-        session.add(coche)
-        session.commit()
-        session.close()
-        
-        return render_template("vender.html", marcas=marcas, paises=paises)
+            return render_template("vender.html", marcas=marcas, paises=paises)
     else:
-        return render_template("vender.html", marcas=marcas, paises=paises)
+        return redirect("signup")
 
 
 @login_manager.user_loader
