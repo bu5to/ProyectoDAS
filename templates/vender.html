@@ -19,22 +19,44 @@
 					<div class="form-inner-cont">
 						<form action="/vender" method="POST" class="main-input">
 							<div class="top-inputs d-grid">
-								<select name="marcaselect" class="form-control">
+								<select name="marcaselect" id="marcaselect" class="form-control">
 									<option disabled selected>Selecciona una marca</option>
 									{% for m in marcas %}
 									<option>{{ m }}</option>
 									{% endfor %}
 									<option>Otro</option>
 								</select>
-								<select name="paisselect" class="form-control">
+								<select name="paisselect" id="paisselect" class="form-control">
 									<option disabled selected>Selecciona un país</option>
 									{% for p in paises %}
 									<option>{{ p }}</option>
 									{% endfor %}
 									<option>Otro</option>
 								</select>
-								<input type="text" placeholder="Marca" name="marca" id="marca" required="">
-								<input type="text" placeholder="País de la marca" name="pais" id="pais" required="">
+								<script>
+									$("#marcaselect").on("change", function () {
+									  var value = $(this).val();
+									  console.log(value);
+									  if (value == "Otro"){
+											$("#marcaselect").hide();
+											$("#paisselect").hide();
+											$("#pais").show();
+											$("#marca").show();
+										};
+									});
+									$("#paisselect").on("change", function () {
+									  var value = $(this).val();
+									  console.log(value);
+									  if (value == "Otro"){
+											$("#marcaselect").hide();
+											$("#paisselect").hide();
+											$("#pais").show();
+											$("#marca").show();
+										};
+									});
+							  	</script>
+								<input type="text" placeholder="Marca" name="marca" id="marca" required="" style="display: none">
+								<input type="text" placeholder="País de la marca" name="pais" id="pais" required="" style="display: none">
 								<input type="text" placeholder="Modelo" name="modelo" id="modelo" required="">
 								<input type="number" placeholder="Año" name="anyo" id="anyo" required="">
 								<input type="text" placeholder="Combustible" name="combustible" id="combustible" required="">
@@ -53,6 +75,7 @@
 								<button type="submit" class="btn btn-theme3">Vender</button>
               </div>
 		</form>
+		
 					</div>
 					
 					<div class="contact-right">

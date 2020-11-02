@@ -58,12 +58,6 @@ def index():
     models = []
     for m in marcas:
         models.append(query.filter(Coche.marca == m).distinct(Coche.modelo)) 
-    print(models)  
-    #sinduplicados = []
-
-    # for mod in models:
-    #     if mod.modelo not in sinduplicados:
-    #         sinduplicados.append(mod)
 
     return render_template("index.html", nCochesDonos=nCochesdonos, 
             nCochesBilbo=nCochesbilbo, 
@@ -184,7 +178,7 @@ def buscar():
         qCiudad = qCiudad.all()
     qCombustible = session.query(Coche)
     if combustible != '':
-        qCombustible = qCombustible.filter(Coche.combustible == ciudad).all()
+        qCombustible = qCombustible.filter(Coche.combustible == combustible).all()
     else:
         qCombustible = qCombustible.all()
     qPrecio = session.query(Coche)
