@@ -293,6 +293,5 @@ def load_user(user_id):
             return user
     return None
 
-def create_app():
-    if __name__ == "__main__":
+if __name__ == "__main__":
         app.run()
