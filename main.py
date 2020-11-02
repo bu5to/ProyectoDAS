@@ -144,6 +144,7 @@ def coche(coche_id):
 
 @app.route('/buscar', methods=['GET', 'POST'])
 def buscar():
+    search = request.form['search']
     if request.form['marca'] != 'Marca':
         marca=request.form['marca']
     else:
@@ -167,6 +168,9 @@ def buscar():
         km = ''
     resultados =[]
     session = Session()
+    qDesc = session.query(Coche)
+    qDesc = qDesc.filter(Coche.descripcion.like("%"+search+"%")).all()
+
     qMarca = session.query(Coche).join(Marca)
     if marca != '':
         qMarca = qMarca.filter(Marca.marca == marca).all()
@@ -226,7 +230,7 @@ def buscar():
     qAnyo = session.query(Coche)
     qAnyo = qAnyo.filter(and_(Coche.anyo >= anoDesde, Coche.anyo <= anoHasta)).all()
 
-    resultados = list(set(qMarca) & set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm) & set(qPot) & set(qAnyo))
+    resultados = list(set(qMarca) & set(qDesc) & set(qModelo) & set(qCiudad) & set(qCombustible) & set(qPrecio) & set(qKm) & set(qPot) & set(qAnyo))
     return render_template("coches.html", busqueda = resultados)
 
 @app.route('/contact')
