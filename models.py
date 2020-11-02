@@ -1,4 +1,4 @@
-from base import Base
+from base import Base, Session
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, Boolean
@@ -51,8 +51,15 @@ class User(Base, UserMixin):
     def __repr__(self):
         return '<User {}>'.format(self.email)
 
-users = []
+def get_users():
+    sesUsers = Session()
+    users = sesUsers.query(User)
+    users = users.all()
+    sesUsers.close()
+    return users
+
 def get_user(email):
+    users = get_users()
     for user in users:
         if user.email == email:
             return user

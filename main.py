@@ -5,7 +5,7 @@ from forms import LoginForm, SignupForm
 from sqlalchemy import create_engine, and_, Column, String, Integer, ForeignKey, select, func
 from sqlalchemy.orm import relationship
 from base import Base, Session
-from models import Coche, Marca, users, User, get_user, Comentario
+from models import Coche, Marca, get_users, User, get_user, Comentario
 from werkzeug.urls import url_parse
 import numpy as np
 import functools
@@ -27,10 +27,11 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login"
 mail = Mail(app)
 
+session = Session()
+session.expire_on_commit = False 
 
 @app.route('/', methods=['GET'])
 def index():
-    session = Session()
     query = session.query(Coche)
     query = query.filter(Coche.ciudad == "Donostia")
     query = query.with_entities(func.count())
@@ -102,6 +103,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = get_user(form.email.data)
+        print(user)
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             next_page = request.args.get('next')
@@ -120,8 +122,12 @@ def show_signup_form():
         email = form.email.data
         password = form.password.data
         # Creamos el usuario y lo guardamos
-        user = User(len(users) + 1, name, email, password)
-        users.append(user)
+        users = get_users()
+        user = User(len(users) + 2, name, email, password)
+        session.add(user)
+        session.commit()
+        session.close()
+        # users.append(user)
         # Dejamos al usuario logueado
         login_user(user, remember=True)
         next_page = request.args.get('next', None)
@@ -259,6 +265,7 @@ def vender():
 
 @login_manager.user_loader
 def load_user(user_id):
+    users = get_users()
     for user in users:
         if user.id == int(user_id):
             return user

@@ -14,7 +14,7 @@ Base.metadata.create_all(engine)
 
 session = Session()
 
-u1 = User(1, "Jorge El Busto", "jebusto@gmail.com", "pass", True)
+#u1 = User(1, "Jorge El Busto", "jebusto@gmail.com", "pass", True)
 
 co1 = Comentario("Juan Pablo Nguema", "He vendido mi Fiat Uno Turbo en Bustomóviles y he de decir que son unos auténticos profesionales.")
 co2 = Comentario("Javier Clemente", "Estaba buscando algún lado en el que vender mi gabarra por falta de uso. Aquí no me la aceptaron, pero se quedaron con mi Mercedes.")
@@ -59,7 +59,7 @@ c27 = Coche(m6, "V40", 1998, 143000, "Gasolina", 122, "Precioso Volvo V40 inmacu
 c28 = Coche(m7, "Yaris", 2009, 190000, "Diesel", 129, "Coche en perfecto estado, único propietario, guardado en garaje (pintura original), todas las revisiones en concesionario oficial. Motor diesel, seis velocidades de muy bajo consumo. ITV hasta 10/2021.", 4450, "Donostia", "https://img.milanuncios.com/fg/3706/80/370680781_1.jpg")
 c29 = Coche(m7, "Avensis", 2006, 156000, "Gasolina", 130, "Se vende Toyota Avensis 1.6 16v VVT-i, 130 CV, año 2006, gasolina con 156000 Km. Muy bien cuidado, un único dueño no fumador y siempre en garaje. En muy buen estado de tapicería y pintura, excepto roce en el paragolpes trasero lado derecho y pequeños toques de abrir y cerrar puertas en parkings.", 4500, "Bilbao", "https://img.milanuncios.com/fg/3705/04/370504309_3.jpg")
 
-session.add(u1)
+#session.add(u1)
 
 session.add(co1)
 session.add(co2)
