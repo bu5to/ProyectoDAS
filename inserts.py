@@ -8,6 +8,7 @@ from models import User, Marca, Coche, Comentario
 
 @click.command(name="inserts")
 @with_appcontext
+def inserts():
     Base.metadata.drop_all(bind=engine, tables=[Coche.__table__])
     Base.metadata.drop_all(bind=engine, tables=[Marca.__table__])
     Base.metadata.drop_all(bind=engine, tables=[User.__table__])
