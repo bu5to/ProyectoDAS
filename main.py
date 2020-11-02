@@ -57,7 +57,8 @@ def index():
     query = session.query(Coche)
     models = []
     for m in marcas:
-        models.append(query.filter(Coche.marca == m).all())   
+        models.append(query.filter(Coche.marca == m).distinct(Coche.modelo)) 
+    print(models)  
     #sinduplicados = []
 
     # for mod in models:
@@ -234,6 +235,13 @@ def contact():
 
 @app.route('/vender', methods=['GET', 'POST'])
 def vender():
+    sesQuery = Session()
+    query = sesQuery.query(Marca)
+    paises = [row.pais for row in query.distinct(Marca.pais)]
+    marcas = [row.marca for row in query.all()]
+    print(marcas)
+    print(paises)
+    sesQuery.close()
     if request.method == 'POST':
         strMarca = request.form['marca']
         strPais = request.form['pais']
@@ -258,9 +266,10 @@ def vender():
         session.add(coche)
         session.commit()
         session.close()
-        return render_template("vender.html")
+        
+        return render_template("vender.html", marcas=marcas, paises=paises)
     else:
-        return render_template("vender.html")
+        return render_template("vender.html", marcas=marcas, paises=paises)
 
 
 @login_manager.user_loader

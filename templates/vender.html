@@ -19,6 +19,20 @@
 					<div class="form-inner-cont">
 						<form action="/vender" method="POST" class="main-input">
 							<div class="top-inputs d-grid">
+								<select name="marcaselect" class="form-control">
+									<option disabled selected>Selecciona una marca</option>
+									{% for m in marcas %}
+									<option>{{ m }}</option>
+									{% endfor %}
+									<option>Otro</option>
+								</select>
+								<select name="paisselect" class="form-control">
+									<option disabled selected>Selecciona un país</option>
+									{% for p in paises %}
+									<option>{{ p }}</option>
+									{% endfor %}
+									<option>Otro</option>
+								</select>
 								<input type="text" placeholder="Marca" name="marca" id="marca" required="">
 								<input type="text" placeholder="País de la marca" name="pais" id="pais" required="">
 								<input type="text" placeholder="Modelo" name="modelo" id="modelo" required="">
@@ -28,7 +42,7 @@
 								<input type="number" placeholder="Kilómetros" name="kilometros" id="kilometros" required="">
 								<input type="number" placeholder="Precio" name="precio" id="precio" required="">
 								<input type="text" placeholder="Imagen (URL)" name="img" id="img" required="">
-								<select id="ciudad" name="ciudad">
+								<select id="ciudad" name="ciudad" class="form-control">
 									<option>Donostia</option>
 									<option>Bilbao</option>
 									<option>Vitoria</option>
