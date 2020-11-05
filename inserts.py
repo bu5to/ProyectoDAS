@@ -1,12 +1,12 @@
 from datetime import date
 import click
 from base import Session, engine, Base
-from flask.cli import with_appcontext
+#from flask.cli import with_appcontext
+import flask.cli
 
 from models import User, Marca, Coche, Comentario
 
-@click.command(name='create_tables')
-@with_appcontext
+@app.cli.command()
 def create_tables():
     Base.metadata.drop_all(bind=engine, tables=[Coche.__table__])
     Base.metadata.drop_all(bind=engine, tables=[Marca.__table__])
