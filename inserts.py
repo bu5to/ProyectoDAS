@@ -6,7 +6,7 @@ import flask.cli
 
 from models import User, Marca, Coche, Comentario
 
-@app.cli.command('create_tables')
+@main.cli.command('create_tables')
 def create_tables():
     Base.metadata.drop_all(bind=engine, tables=[Coche.__table__])
     Base.metadata.drop_all(bind=engine, tables=[Marca.__table__])
