@@ -30,7 +30,6 @@ app.cli.add_command(create_tables)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 mail = Mail(app)
-inserts.create_tables()
 session = Session()
 session.expire_on_commit = False 
 
@@ -295,3 +294,7 @@ def load_user(user_id):
         if user.id == int(user_id):
             return user
     return None
+
+if __name__ == '__main__':
+    app.run(debug == True)
+    
