@@ -5,7 +5,7 @@ from forms import LoginForm, SignupForm
 from sqlalchemy import create_engine, and_, Column, String, Integer, ForeignKey, select, func
 from sqlalchemy.orm import relationship
 from base import Base, Session
-from models import Coche, Marca, get_users, Usuario, get_user, Comentario
+from models import Coche, Marca, get_users, User, get_user, Comentario
 from werkzeug.urls import url_parse
 import numpy as np
 import functools
@@ -14,7 +14,6 @@ from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost:5432/bustomoviles'
-app.config['DATABASE_URL'] = 'postgres://bpyzodwvtsscct:309b4d8d7d7fc8d61715e4e9bec4f61b94ba84406ec4b327c52b7924a5137607@ec2-54-247-78-30.eu-west-1.compute.amazonaws.com:5432/d255l5nmsmvmo9'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
 app.config['MAIL_SERVER']='smtp.gmail.com'
@@ -119,7 +118,7 @@ def show_signup_form():
         password = form.password.data
         # Creamos el usuario y lo guardamos
         users = get_users()
-        user = Usuario(len(users) + 2, name, email, password)
+        user = User(len(users) + 2, name, email, password)
         session.add(user)
         session.commit()
         session.close()
@@ -292,7 +291,3 @@ def load_user(user_id):
         if user.id == int(user_id):
             return user
     return None
-
-
-if __name__ == "__main__":
-    app.run(debug=True)

@@ -1,25 +1,30 @@
 {% extends 'base.html' %} {% block title %} - Inicio {% endblock %}{% block content %}
 <section class="form-12" id="home">
-    <div class="form-12-content">
-        <div class="container">
-            <div class="grid grid-column-2">
-                <div class="column2"></div>
-                <div class="column1">
-                    <form action="/buscar" method="POST">
-                        <div class="blog-search form d-flex search-form">
-                            <input type="search" class="form-control" placeholder="Introduce tus palabras clave" name="search" />
-                            <button type="submit" class="btn search-btn">
+  <div class="form-12-content">
+    <div class="container">
+      <div class="grid grid-column-2">
+        <div class="column2"></div>
+        <div class="column1">
+          <form action="/buscar" method="POST">
+            <div class="blog-search form d-flex search-form">
+              <input
+                type="search"
+                class="form-control"
+                placeholder="Introduce tus palabras clave"
+                name="search"
+              />
+              <button type="submit" class="btn search-btn">
                 <span class="fa fa-search"></span>
               </button>
-                        </div>
-                        <div class="form-top">
-                            <select id="marca" name="marca">
+            </div>
+            <div class="form-top">
+              <select id="marca" name="marca">
                 <option>Marca</option>
                 {% for marca in arrMarcas %}
                 <option>{{ marca.marca }}</option>
                 {% endfor %}
               </select>
-                            <select name="modelo">
+              <select name="modelo">
                 <option>Modelo</option>
                 {% for m in models %} {% for c in m %}
                 <option class="{{c.marca.marca}}" style="display: none" name="{{c.modelo}}" value="{{c.modelo}}">
@@ -27,49 +32,48 @@
                 </option>
                 {% endfor %} {% endfor %}
               </select>
-                            <script>
-                                $("#marca").on("focusin", function() {
-                                    console.log("Saving value " + $(this).val());
-                                    $(this).data("val", $(this).val());
-                                });
+              <script>
+                $("#marca").on("focusin", function () {
+                  console.log("Saving value " + $(this).val());
+                  $(this).data("val", $(this).val());
+                });
 
-                                $("#marca").on("change", function() {
-                                    var prev = $(this).data("val");
-                                    var current = $(this).val();
-                                    $("." + prev).hide();
-                                    $("." + current).show();
-                                });
-                            </script>
-                        </div>
+                $("#marca").on("change", function () {
+                  var prev = $(this).data("val");
+                  var current = $(this).val();
+                  $("." + prev).hide();
+                  $("." + current).show();
+                });
+              </script>
+            </div>
 
-                        <div class="form-top">
-                            <select name="ciudad">
+            <div class="form-top">
+              <select name="ciudad">
                 <option>Todas las ciudades</option>
                 {% for ciu in ciudades %}
                 <option value="{{ciu}}">{{ ciu }}</option>
                 {% endfor %}
               </select>
-                            <select name="combustible">
+              <select name="combustible">
                 <option>Combustible</option>
                 {% for c in combustibles %}
                 <option value="{{c}}">{{ c }}</option>
                 {% endfor %}
               </select>
-                        </div>
+            </div>
 
-                        <div class="form-top">
-                            <div class="slidecontainer">
-                                <p>Precio máximo: <input type="text" id="precioTxt" value=""></input>
-                                </p>
-                                <input name="precio" type="range" min="1" max="50000" value="50000" onchange="updateTextInput(this.value);">
-                                <script>
-                                    function updateTextInput(val) {
-                                        document.getElementById('precioTxt').value = val;
-                                    }
-                                </script>
-                            </div>
-
-                            <select name="km">
+            <div class="form-top">
+              <div class="slidecontainer">
+                <p>Precio máximo: <input type="text" id="precioTxt" value=""></input></p>
+                <input name="precio" type="range" min="1" max="50000" value="50000" onchange="updateTextInput(this.value);">
+                <script>
+                  function updateTextInput(val) {
+                      document.getElementById('precioTxt').value=val; 
+                      }
+                </script>
+              </div>
+              
+              <select name="km">
                 <option>Kilómetros</option>
                 <option value="10k">Menos de 10.000</option>
                 <option value="1050k">Entre 10.000 y 50.000</option>
@@ -78,178 +82,195 @@
                 <option value="200300k">Entre 200.000 y 300.000</option>
                 <option value="300k">Más de 300.000</option>
               </select>
-                        </div>
-
-                        <div class="form-top">
-                            <input type="text" placeholder="Potencia mínima" name="potMinima">
-                            <input type="text" placeholder="Potencia máxima" name="potMaxima">
-                            <input type="text" placeholder="Año desde..." name="anodesde">
-                            <input type="text" placeholder="Año hasta..." name="anohasta">
-                            <br>
-                        </div>
-                        <div style="background:#02ad88">
-                            <input type="submit" class="btn search-btn" value="Buscar" style="color:white;background:#02ad88"><span class="fa fa-search" style="color:white"></span></input>
-                        </div>
-
-                        <!-- </a> -->
-                    </form>
-                </div>
             </div>
+
+            <div class="form-top">
+              <input type="text" placeholder="Potencia mínima" name="potMinima">
+              <input type="text" placeholder="Potencia máxima" name="potMaxima">
+              <input type="text" placeholder="Año desde..." name="anodesde">
+              <input type="text" placeholder="Año hasta..." name="anohasta">
+              <br>
+            </div>
+              <div style="background:#02ad88">
+                <input type="submit" class="btn search-btn" value="Buscar" style="color:white;background:#02ad88"><span class="fa fa-search" style="color:white"></span></input>
+              </div>
+              
+            <!-- </a> -->
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <section class="locations-1" id="locations">
-    <div class="locations py-5">
-        <div class="container py-md-3">
-            <div class="heading text-center mx-auto">
-                <h3 class="head">¡Disponibles en las tres provincias!</h3>
-                <p class="my-3 head">
-                    Disponemos de establecimientos en las tres provincias del País Vasco en los que puedes negociar la compra de tu vehículo de ocasión, concretamente en las capitales: San Sebastián, Bilbao, y Vitoria-Gasteiz.
-                </p>
+  <div class="locations py-5">
+    <div class="container py-md-3">
+      <div class="heading text-center mx-auto">
+        <h3 class="head">¡Disponibles en las tres provincias!</h3>
+        <p class="my-3 head">
+          Disponemos de establecimientos en las tres provincias del País Vasco
+          en los que puedes negociar la compra de tu vehículo de ocasión, concretamente en las capitales:
+          San Sebastián, Bilbao, y Vitoria-Gasteiz.
+        </p>
+      </div>
+      <div class="row mt-3 pt-5">
+        <div class="col-md-4 col-sm-6">
+          <div class="box16">
+            <img
+              class="img-fluid"
+              src="{{url_for ('static', filename='assets/images/g1.jpg') }}"
+              alt=""
+            />
+            <div class="box-content">
+              <h3 class="title">Donostia - San Sebastián</h3>
+              <span class="post">{{nCochesDonos}} vehículos</span>
             </div>
-            <div class="row mt-3 pt-5">
-                <div class="col-md-4 col-sm-6">
-                    <div class="box16">
-                        <img class="img-fluid" src="{{url_for ('static', filename='assets/images/g1.jpg') }}" alt="" />
-                        <div class="box-content">
-                            <h3 class="title">Donostia - San Sebastián</h3>
-                            <span class="post">{{nCochesDonos}} vehículos</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="box16">
-                        <img class="img-fluid" src="{{url_for ('static', filename='assets/images/g2.jpg') }}" alt="" />
-                        <div class="box-content">
-                            <h3 class="title">Bilbao</h3>
-                            <span class="post">{{nCochesBilbo}} vehículos</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 mt-lg-0 pt-lg-0 mt-md-4 pt-md-2">
-                    <div class="box16">
-                        <img class="img-fluid" src="{{url_for ('static', filename='assets/images/g3.jpg') }}" alt="" />
-                        <div class="box-content">
-                            <h3 class="title">Vitoria - Gasteiz</h3>
-                            <span class="post">{{nCochesVito}} vehículos</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="box16">
+            <img
+              class="img-fluid"
+              src="{{url_for ('static', filename='assets/images/g2.jpg') }}"
+              alt=""
+            />
+            <div class="box-content">
+              <h3 class="title">Bilbao</h3>
+              <span class="post">{{nCochesBilbo}} vehículos</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mt-lg-0 pt-lg-0 mt-md-4 pt-md-2">
+          <div class="box16">
+            <img
+              class="img-fluid"
+              src="{{url_for ('static', filename='assets/images/g3.jpg') }}"
+              alt=""
+            />
+            <div class="box-content">
+              <h3 class="title">Vitoria - Gasteiz</h3>
+              <span class="post">{{nCochesVito}} vehículos</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 <section class="w3l-services2" id="services">
-    <div class="features-with-17_sur py-5">
-        <div class="container py-md-3">
-            <div class="heading text-center mx-auto">
-                <h3 class="head text-white">Nuestra empresa</h3>
+  <div class="features-with-17_sur py-5">
+    <div class="container py-md-3">
+      <div class="heading text-center mx-auto">
+        <h3 class="head text-white">Nuestra empresa</h3>
+      </div>
+      <div class="row pt-5 mt-3">
+        <div class="col-lg-5 features-with-17-left_sur">
+          <h4 class="lft-head">¡Compra y vende de manera segura!</h4>
+          <p style="text-align: justify;">
+            Bustomóviles está diseñado de una manera totalmente segura. 
+            Cuenta con una base de datos alojada en PostgreSQL y una API perfectamente funcional en Flask. <br>
+            Mediante UserMixin, se asegura la confidencialidad de la contraseña generando un hash, así que los usuarios
+            pueden realizar operaciones con total confianza y tranquilidad.
+          </p>
+          
+          <div class="stats-1">
+            <div class="stats-1-left">
+              <h4>{{nCochesDonos + nCochesBilbo + nCochesVito}}</h4>
+              <h6>Coches a la venta</h6>
             </div>
-            <div class="row pt-5 mt-3">
-                <div class="col-lg-5 features-with-17-left_sur">
-                    <h4 class="lft-head">¡Compra y vende de manera segura!</h4>
-                    <p style="text-align: justify;">
-                        Bustomóviles está diseñado de una manera totalmente segura. Cuenta con una base de datos alojada en PostgreSQL y una API perfectamente funcional en Flask. <br> Mediante UserMixin, se asegura la confidencialidad de la contraseña
-                        generando un hash, así que los usuarios pueden realizar operaciones con total confianza y tranquilidad.
-                    </p>
-
-                    <div class="stats-1">
-                        <div class="stats-1-left">
-                            <h4>{{nCochesDonos + nCochesBilbo + nCochesVito}}</h4>
-                            <h6>Coches a la venta</h6>
-                        </div>
-                        <div class="stats-1-left">
-                            <h4>{{ arrMarcas|length }}</h4>
-                            <h6>Marcas disponibles</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7 my-lg-0 my-5 align-self-center features-with-17-right_sur">
-                    <div class="features-with-17-right-tp_sur">
-                        <div class="features-with-17-left1">
-                            <span class="fa fa-laptop s4"></span>
-                        </div>
-                        <div class="features-with-17-left2">
-                            <h6><a href="https://getbootstrap.com/">Interfaz intuitiva y sencilla</a></h6>
-                            <p>
-                                Mediante Bootstrap, la página web ha sido diseñada de manera que funcione de forma responsiva y sencilla.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="features-with-17-right-tp_sur">
-                        <div class="features-with-17-left1">
-                            <span class="fa fa-database s5"></span>
-                        </div>
-                        <div class="features-with-17-left2">
-                            <h6><a href="https://www.sqlalchemy.org/">Base de datos segura</a></h6>
-                            <p>
-                                Se han utilizado SQLAlchemy y PostgreSQL para sacar el máximo partido de datos tanto relacionales como no relacionales.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="features-with-17-right-tp_sur">
-                        <div class="features-with-17-left1">
-                            <span class="fa fa-car s3"></span>
-                        </div>
-                        <div class="features-with-17-left2">
-                            <h6><a href="{{url_for ('index')}}">Tu coche estará como en casa</a></h6>
-                            <p>
-                                Durante el proceso de compraventa realizamos rigurosos procesos de mantenimiento para dejar el coche impoluto.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="features-with-17-right-tp_sur">
-                        <div class="features-with-17-left1">
-                            <span class="fa fa-linkedin s2"></span>
-                        </div>
-                        <div class="features-with-17-left2">
-                            <h6><a href="https://www.linkedin.com/in/jorge-el-busto/">Fundador con experiencia</a></h6>
-                            <p>
-                                Conoce más acerca del fundador de nuestra empresa y contacta con él.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="stats-1-left">
+              <h4>{{ arrMarcas|length }}</h4>
+              <h6>Marcas disponibles</h6>
             </div>
+          </div>
         </div>
+        <div
+          class="col-lg-7 my-lg-0 my-5 align-self-center features-with-17-right_sur"
+        >
+          <div class="features-with-17-right-tp_sur">
+            <div class="features-with-17-left1">
+              <span class="fa fa-laptop s4"></span>
+            </div>
+            <div class="features-with-17-left2">
+              <h6><a href="https://getbootstrap.com/">Interfaz intuitiva y sencilla</a></h6>
+              <p>
+                Mediante Bootstrap, la página web ha sido diseñada de manera que funcione de forma responsiva y sencilla.
+              </p>
+            </div>
+          </div>
+          <div class="features-with-17-right-tp_sur">
+            <div class="features-with-17-left1">
+              <span class="fa fa-database s5"></span>
+            </div>
+            <div class="features-with-17-left2">
+              <h6><a href="https://www.sqlalchemy.org/">Base de datos segura</a></h6>
+              <p>
+                Se han utilizado SQLAlchemy y PostgreSQL para sacar el máximo partido de datos tanto relacionales como no relacionales.
+              </p>
+            </div>
+          </div>
+          <div class="features-with-17-right-tp_sur">
+            <div class="features-with-17-left1">
+              <span class="fa fa-car s3"></span>
+            </div>
+            <div class="features-with-17-left2">
+              <h6><a href="{{url_for ('index')}}">Tu coche estará como en casa</a></h6>
+              <p>
+                Durante el proceso de compraventa realizamos rigurosos procesos de mantenimiento para dejar el coche impoluto.
+              </p>
+            </div>
+          </div>
+          <div class="features-with-17-right-tp_sur">
+            <div class="features-with-17-left1">
+              <span class="fa fa-linkedin s2"></span>
+            </div>
+            <div class="features-with-17-left2">
+              <h6><a href="https://www.linkedin.com/in/jorge-el-busto/">Fundador con experiencia</a></h6>
+              <p>
+                Conoce más acerca del fundador de nuestra empresa y contacta con él.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 <section class="w3l-testimonials" id="testimonials">
-    <div class="customers-6-content py-5">
-        <div class="container py-lg-3">
-            <div class="heading text-center mx-auto">
-                <h3 class="head">Comentarios de clientes</h3>
-                <p class="my-3 head">
-                    En Bustomóviles nos tomamos más en serio que nunca las críticas de nuestros clientes. La gran mayoría están satisfechos con nuestro servicio. Puedes leerlos aquí.
-                </p>
-            </div>
+  <div class="customers-6-content py-5">
+    <div class="container py-lg-3">
+      <div class="heading text-center mx-auto">
+        <h3 class="head">Comentarios de clientes</h3>
+        <p class="my-3 head">
+          En Bustomóviles nos tomamos más en serio que nunca las críticas de nuestros clientes. La gran mayoría están satisfechos con nuestro servicio. Puedes leerlos aquí.
+        </p>
+      </div>
 
-            <div id="customerhnyCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner pb-5">
-                    <div class="carousel-item active">
-                        <div class="customer row py-5 mt-3">
-
-                            {% for c in comentarios %}
-                            <div class="col-lg-4 col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <span class="fa fa-quote-left" aria-hidden="true"></span>
-                                        <h3 class="card-title">{{c.nombre}}</h3>
-                                        <p class="card-text text-center mb-4">
-                                            {{c.comentario}}
-                                        </p>
-                                        <div class="text-right">
-                                            <span class="fa fa-quote-right" aria-hidden="true"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> {% endfor %}
-                        </div>
+      <div id="customerhnyCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner pb-5">
+          <div class="carousel-item active">
+            <div class="customer row py-5 mt-3">
+              
+                {% for c in comentarios %}<div class="col-lg-4 col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <span class="fa fa-quote-left" aria-hidden="true"></span>
+                    <h3 class="card-title">{{c.nombre}}</h3>
+                    <p class="card-text text-center mb-4">
+                      {{c.comentario}}
+                    </p>
+                    <div class="text-right">
+                      <span class="fa fa-quote-right" aria-hidden="true"></span>
                     </div>
+                  </div>
                 </div>
-                <!--.carousel-inner-->
+              </div>  {% endfor %}
             </div>
+          </div>
         </div>
+        <!--.carousel-inner-->
+      </div>
     </div>
+  </div>
 </section>
 {% endblock %}
