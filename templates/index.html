@@ -5,7 +5,7 @@
             <div class="grid grid-column-2">
                 <div class="column2"></div>
                 <div class="column1" style="width: 100%; margin:10px; padding:10px;">
-                    <form id="buscarform" action="/buscar" method="POST">
+                    <form action="/buscar" method="POST">
                         <div class="blog-search form d-flex search-form">
                             <input type="search" class="form-control" placeholder="Introduce tus palabras clave" name="search" />
                             <button type="submit" class="btn search-btn">
@@ -90,7 +90,7 @@
                             <input type="text" placeholder="Año hasta..." name="anohasta" style="width: 100%">
                             <br>
                         </div>
-                        <div style="background:#02ad88" onClick="document.forms['buscarform'].submit();">
+                        <div style="background:#02ad88">
                             <input type="submit" class="btn search-btn" value="Buscar" style="color:white;background:#02ad88"><span class="fa fa-search" style="color:white"></span></input>
                         </div>
 
