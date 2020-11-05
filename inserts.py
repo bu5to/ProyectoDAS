@@ -3,10 +3,12 @@ import click
 from base import Session, engine, Base
 #from flask.cli import with_appcontext
 import flask.cli
+    
 
 from models import User, Marca, Coche, Comentario
 
-@app.cli.command('create_tables')
+@click.command()
+@with_appcontext
 def create_tables():
     Base.metadata.drop_all(bind=engine, tables=[Coche.__table__])
     Base.metadata.drop_all(bind=engine, tables=[Marca.__table__])
@@ -104,3 +106,5 @@ def create_tables():
 
     session.commit()
     session.close()
+
+
