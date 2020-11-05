@@ -31,7 +31,7 @@ class Coche(Base):
         self.ciudad = ciudad
         self.img = img
 
-class User(Base, UserMixin):
+class Usuario(Base, UserMixin):
     __tablename__='user'
     id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -49,13 +49,13 @@ class User(Base, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
     def __repr__(self):
-        return '<User {}>'.format(self.email)
+        return '<Usuario {}>'.format(self.email)
 
 def get_users():
-    sesUsers = Session()
-    users = sesUsers.query(User)
+    sesUsuarios = Session()
+    users = sesUsuarios.query(Usuario)
     users = users.all()
-    sesUsers.close()
+    sesUsuarios.close()
     return users
 
 def get_user(email):

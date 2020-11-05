@@ -5,7 +5,7 @@ from forms import LoginForm, SignupForm
 from sqlalchemy import create_engine, and_, Column, String, Integer, ForeignKey, select, func
 from sqlalchemy.orm import relationship
 from base import Base, Session
-from models import Coche, Marca, get_users, User, get_user, Comentario
+from models import Coche, Marca, get_users, Usuario, get_user, Comentario
 from werkzeug.urls import url_parse
 import numpy as np
 import functools
@@ -119,7 +119,7 @@ def show_signup_form():
         password = form.password.data
         # Creamos el usuario y lo guardamos
         users = get_users()
-        user = User(len(users) + 2, name, email, password)
+        user = Usuario(len(users) + 2, name, email, password)
         session.add(user)
         session.commit()
         session.close()
