@@ -4,8 +4,7 @@ Author URL: http://w3layouts.com
 -->
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
@@ -18,163 +17,165 @@ Author URL: http://w3layouts.com
     <!-- Template CSS -->
     <link rel="stylesheet" type="text/css" href="{{url_for ('static', filename='assets/css/style-starter.css') }}">
     <style>
-        .slidecontainer {
-            width: 100%;
-        }
-        
-        .slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 25px;
-            background: #d3d3d3;
-            outline: none;
-            opacity: 0.7;
-            -webkit-transition: .2s;
-            transition: opacity .2s;
-        }
-        
-        .slider:hover {
-            opacity: 1;
-        }
-        
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 25px;
-            height: 25px;
-            background: #4CAF50;
-            cursor: pointer;
-        }
-        
-        .slider::-moz-range-thumb {
-            width: 25px;
-            height: 25px;
-            background: #4CAF50;
-            cursor: pointer;
-        }
-    </style>
-    {% block head%} {% endblock %}
-</head>
+      .slidecontainer {
+        width: 100%;
+      }
+      
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+      }
+      
+      .slider:hover {
+        opacity: 1;
+      }
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background: #4CAF50;
+        cursor: pointer;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: #4CAF50;
+        cursor: pointer;
+      }
+      </style>
+      {% block head%} {% endblock %}
+  </head>
+  <body>
 
-<body>
 
-
-    <!-- Top Menu 1 -->
-    <section class="w3l-top-menu-1">
-        <div class="top-hd">
-            <div class="container">
-                <header class="row">
-                    <div class="social-top col-lg-3 col-6">
-                        <li>Síguenos</li>
-                        <li><a href="https://instagram.com/mazda3jb"><span class="fa fa-instagram"></span></a></li>
-                        <li><a href="https://github.com/bu5to"><span class="fa fa-github"></span></a> </li>
-                    </div>
-                    <div class="accounts col-lg-9 col-12">
-                        <li class="top_li"><span class="fa fa-mobile"></span><a href="tel:+34 943 999 999">+34 943 999 999</a> </li>
-                        {% if current_user.is_anonymous %}
-                        <li class="top_li"><span class="fa fa-user"></span><a href="{{ url_for('login')}}">Iniciar sesión</a></li>
-                        <li class="top_li"><a href="{{ url_for('show_signup_form') }}">Registrarse</a></li>
-                        {% else %}
-                        <li class="top_li"><span class="fa fa-user"></span>Hola, {{ current_user.name }}</li>
-                        <li class="top_li"><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
-                        {% endif %}
-
-                    </div>
-
-                </header>
-            </div>
-        </div>
-    </section>
-    <!-- //Top Menu 1 -->
-    <section class="w3l-bootstrap-header">
-        <nav class="navbar navbar-expand-lg navbar-light py-lg-2 py-2">
-            <div class="container">
-                <!-- <a class="navbar-brand" href="index.html"><span class="fa fa-home"></span> Estate Agent</a> -->
-                <a class="navbar-brand" href="{{ url_for('index') }}">
-                    <img src="{{url_for ('static', filename='assets/images/bustomoviles.png') }}" alt="Bustomoviles" title="Bustomoviles" style="height:35px;" />
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Top Menu 1 -->
+<section class="w3l-top-menu-1">
+	<div class="top-hd">
+		<div class="container">
+	<header class="row">
+		<div class="social-top col-lg-3 col-6">
+			<li>Síguenos</li>
+			<li><a href="https://instagram.com/mazda3jb"><span class="fa fa-instagram"></span></a></li>
+			<li><a href="https://github.com/bu5to"><span class="fa fa-github"></span></a> </li>
+		</div>
+		<div class="accounts col-lg-9 col-12">
+        <li class="top_li"><span class="fa fa-mobile"></span><a href="tel:+34 943 999 999">+34 943 999 999</a> </li>
+        {% if current_user.is_anonymous %}
+        <li class="top_li"><span class="fa fa-user"></span><a href="{{ url_for('login')}}">Iniciar sesión</a></li>
+				<li class="top_li"><a href="{{ url_for('show_signup_form') }}">Registrarse</a></li>
+        {% else %}
+        <li class="top_li"><span class="fa fa-user"></span>Hola, {{ current_user.name }}</li>
+				<li class="top_li"><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+        {% endif %}
+				
+		</div>
+		
+	</header>
+</div>
+</div>
+</section>
+<!-- //Top Menu 1 -->
+<section class="w3l-bootstrap-header">
+  <nav class="navbar navbar-expand-lg navbar-light py-lg-2 py-2">
+    <div class="container">
+      <!-- <a class="navbar-brand" href="index.html"><span class="fa fa-home"></span> Estate Agent</a> -->
+    <a class="navbar-brand" href="{{ url_for('index') }}">
+        <img src="{{url_for ('static', filename='assets/images/bustomoviles.png') }}" alt="Bustomoviles" title="Bustomoviles" style="height:35px;" />
+    </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon fa fa-bars"></span>
       </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.linkedin.com/in/jorge-el-busto/">¿Quiénes somos?</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('index') }}">Compra</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('vender') }}">Vende</a>
-                        </li>
-                        <li class="nav-item mr-0">
-                            <a class="nav-link" href="{{ url_for('contact') }}">Contacto</a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-    </section>
-    {% block content %} {% endblock %}
-    <section class="w3l-footer-29-main" id="footer" style='background-image: url("{{ url_for(' static ', filename='assets/images/banner footer.jpg ') }}");'>
-        <div class="container pt-5">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">Compra</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('vender') }}">Vende</a>
+          </li>
+        
+          <li class="nav-item mr-0">
+            <a class="nav-link" href="{{ url_for('contact') }}">Contacto</a>
+          </li>
+        </ul>
+       
+      </div>
+    </div>
+  </nav>
+</section>
+{% block content %}  {% endblock %}
+<section class="w3l-footer-29-main" id="footer" style='background-image: url("{{ url_for('static', filename='assets/images/banner footer.jpg') }}");'>
+        <div class="container pt-5" >
             <div class="bottom-copies text-center">
-                <p class="copy-footer-29">2020-2021 | Jorge El Busto | Ingeniería Informática + TDE | Desarrollo Avanzado de Software</a>
-                </p>
-
+                <p class="copy-footer-29">2020-2021 | Jorge El Busto | Ingeniería Informática + TDE | Desarrollo Avanzado de Software</a></p>
+                
             </div>
         </div>
-        </div>
-        <!-- move top -->
-        <button onclick="topFunction()" id="movetop" title="Go to top">
+    </div>
+     <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
                 <span class="fa fa-angle-up"></span>
                    </button>
-        <script>
-            // When the user scrolls down 20px from the top of the document, show the button
-            window.onscroll = function() {
-                scrollFunction()
-            };
-
-            function scrollFunction() {
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    document.getElementById("movetop").style.display = "block";
-                } else {
-                    document.getElementById("movetop").style.display = "none";
-                }
-            }
-
-            // When the user clicks on the button, scroll to the top of the document
-            function topFunction() {
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-            }
-        </script>
-        <!-- /move top -->
-    </section>
-    <!-- // grids block 5 -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <!-- //footer-28 block -->
-    </section>
-
-    <script>
-        $(function() {
-            $('.navbar-toggler').click(function() {
-                $('body').toggleClass('noscroll');
-            })
-        });
+                   <script>
+                       // When the user scrolls down 20px from the top of the document, show the button
+                       window.onscroll = function () {
+                           scrollFunction()
+                       };
+                
+                       function scrollFunction() {
+                           if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                               document.getElementById("movetop").style.display = "block";
+                           } else {
+                               document.getElementById("movetop").style.display = "none";
+                           }
+                       }
+                
+                       // When the user clicks on the button, scroll to the top of the document
+                       function topFunction() {
+                           document.body.scrollTop = 0;
+                           document.documentElement.scrollTop = 0;
+                       }
+                   </script>
+                   <!-- /move top -->
+  </section>
+  <!-- // grids block 5 -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <!-- //footer-28 block -->
+  </section>
+  
+  <script>
+      $(function () {
+        $('.navbar-toggler').click(function () {
+          $('body').toggleClass('noscroll');
+        })
+      });
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-
-    <!-- Smooth scrolling -->
-
-
-</body>
-
-</html>
+  
+  <!-- Smooth scrolling -->
+  
+  
+  </body>
+  
+  </html>
