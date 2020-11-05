@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:8000 flaskapp:main
+web: gunicorn --bind 0.0.0.0:8000 main:main
