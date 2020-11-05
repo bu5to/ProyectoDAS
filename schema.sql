@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS bustomoviles;
+CREATE DATABASE bustomoviles;

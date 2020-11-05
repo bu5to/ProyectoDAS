@@ -1,0 +1,2 @@
+CREATE USER das IDENTIFIED BY 'das';
+GRANT ALL PRIVILEGES ON bustomoviles.* TO das;
