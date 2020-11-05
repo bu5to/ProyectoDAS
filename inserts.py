@@ -104,6 +104,7 @@ def create_tables():
     session.add(c29)
 
     session.commit()
+    print("DATOS AÑADIDOS CON EXITO")
     session.close()
 
 
