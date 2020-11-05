@@ -9,6 +9,7 @@ from models import Coche, Marca, get_users, User, get_user, Comentario
 from werkzeug.urls import url_parse
 import numpy as np
 import functools
+import inserts
 from flask_mail import Mail, Message
 
 
@@ -29,7 +30,7 @@ app.config['MAIL_USE_SSL'] = True
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 mail = Mail(app)
-
+inserts.create_tables()
 session = Session()
 session.expire_on_commit = False 
 
