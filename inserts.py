@@ -1,8 +1,8 @@
 from datetime import date
-
+import click
 from base import Session, engine, Base
 from flask.cli import with_appcontext
-import click
+
 from models import User, Marca, Coche, Comentario
 
 @click.command(name='create_tables')
