@@ -9,6 +9,7 @@ from models import Coche, Marca, get_users, User, get_user, Comentario
 from werkzeug.urls import url_parse
 import numpy as np
 import functools
+from commands import create_tables
 from flask_mail import Mail, Message
 
 
@@ -26,6 +27,7 @@ app.config['MAIL_PASSWORD'] = 'joseaspasromano'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
+create_tables()
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 mail = Mail(app)
