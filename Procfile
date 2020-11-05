@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:8000 main:main
+web: gunicorn --bind 0.0.0.0:8000 main:index
