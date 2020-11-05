@@ -1,44 +1,43 @@
-{% extends 'base.html' %} {% block title %} - Búsqueda {% endblock %}
-{% block head %}
+{% extends 'base.html' %} {% block title %} - Búsqueda {% endblock %} {% block head %}
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-{% endblock %}
-{% block content %}
+{% endblock %} {% block icons %}
+<li><a href="https://instagram.com/mazda3jb"><i class="fab fa-instagram"></i></a></li>
+<li><a href="https://github.com/bu5to"><i class="fab fa-github"></i></a> </li>
+{% endblock %} {% block content %}
 
 <section class="grids-4" id="properties">
-  <div id="grids4-block" class="py-5">
-    {% if busqueda|length > 0 %}
-    <div class="container py-md-3">
-      <div class="heading text-center mx-auto">
-        <h3 class="head">Resultados de la búsqueda</h3>
-        <p class="my-3 head">
-          Estos son los coches que se corresponden con los criterios que has establecido en la búsqueda.
-        </p>
-      </div>
-      <div class="row mt-5 pt-3">
-        {% for c in busqueda %}
-        <div class="grids4-info col-lg-4 col-md-6">
-          <a href="{{ url_for('coche' ,coche_id=c.id) }}"
-            ><img src="{{c.img}}" class="img-fluid" alt=""
-          /></a>
-          <ul class="location-top">
-            <li class="open-1">En venta</li>
-          </ul>
-          <div class="info-bg">
-            <h5><a href="{{ url_for('coche' ,coche_id=c.id) }}">{{c.marca.marca}} {{c.modelo}}</a></h5>
-            <p style="text-align:justify"> {{c.descripcion}} </p>
-            <h6>{{c.precio}} €</h6>
-            <ul>
-              <li><i class="fas fa-gas-pump" style='color:#4CAF50'></i> {{c.combustible}}</li>
-              <li><i class="fas fa-tachometer-alt" style='color:#4CAF50'></i> {{c.kilometros}} kilómetros</li>
-              <br>
-              <li><i class="fas fa-city" style='color:#4CAF50'></i> {{c.ciudad}}</li>
-              <li><i class="fas fa-calendar" style='color:#4CAF50'></i> {{c.anyo}}</li>
-              <li><i class="fas fa-bolt" style='color:#4CAF50'></i> {{c.potencia}} CV</li>
-            </ul>
-          </div>
-        </div>
-        {% endfor %}
-        <!-- <div class="grids4-info col-lg-4 col-md-6">
+    <div id="grids4-block" class="py-5">
+        {% if busqueda|length > 0 %}
+        <div class="container py-md-3">
+            <div class="heading text-center mx-auto">
+                <h3 class="head">Resultados de la búsqueda</h3>
+                <p class="my-3 head">
+                    Estos son los coches que se corresponden con los criterios que has establecido en la búsqueda.
+                </p>
+            </div>
+            <div class="row mt-5 pt-3">
+                {% for c in busqueda %}
+                <div class="grids4-info col-lg-4 col-md-6">
+                    <a href="{{ url_for('coche' ,coche_id=c.id) }}"><img src="{{c.img}}" class="img-fluid" alt="" /></a>
+                    <ul class="location-top">
+                        <li class="open-1">En venta</li>
+                    </ul>
+                    <div class="info-bg">
+                        <h5><a href="{{ url_for('coche' ,coche_id=c.id) }}">{{c.marca.marca}} {{c.modelo}}</a></h5>
+                        <p style="text-align:justify"> {{c.descripcion}} </p>
+                        <h6>{{c.precio}} €</h6>
+                        <ul>
+                            <li><i class="fas fa-gas-pump" style='color:#4CAF50'></i> {{c.combustible}}</li>
+                            <li><i class="fas fa-tachometer-alt" style='color:#4CAF50'></i> {{c.kilometros}} kilómetros</li>
+                            <br>
+                            <li><i class="fas fa-city" style='color:#4CAF50'></i> {{c.ciudad}}</li>
+                            <li><i class="fas fa-calendar" style='color:#4CAF50'></i> {{c.anyo}}</li>
+                            <li><i class="fas fa-bolt" style='color:#4CAF50'></i> {{c.potencia}} CV</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- <div class="grids4-info col-lg-4 col-md-6">
           <a href="#"
             ><img src="assets/images/g7.jpg" class="img-fluid" alt=""
           /></a>
@@ -56,7 +55,7 @@
             </ul>
           </div>
         </div> -->
-        <!-- <div class="grids4-info col-lg-4 col-md-6 mt-md-0 mt-5">
+                <!-- <div class="grids4-info col-lg-4 col-md-6 mt-md-0 mt-5">
           <a href="#"
             ><img src="assets/images/g8.jpg" class="img-fluid" alt=""
           /></a>
@@ -146,19 +145,19 @@
             </ul>
           </div>
         </div> -->
-      </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="container py-md-3">
+            <div class="heading text-center mx-auto">
+                <h3 class="head">No se han encontrado resultados</h3>
+                <p class="my-3 head">
+                    Prueba a establecer otros criterios de búsqueda. Con los que has establecido, no hemos podido encontrar ningún coche.
+                </p>
+            </div>
+        </div>
+        {% endif %}
     </div>
-    {% else %}
-    <div class="container py-md-3">
-      <div class="heading text-center mx-auto">
-        <h3 class="head">No se han encontrado resultados</h3>
-        <p class="my-3 head">
-          Prueba a establecer otros criterios de búsqueda. Con los que has establecido, no hemos podido encontrar ningún coche.
-        </p>
-      </div>
-    </div>
-    {% endif %}
-  </div>
 </section>
 
 {% endblock %}
