@@ -2,8 +2,7 @@ from datetime import date
 import click
 from base import Session, engine, Base
 #from flask.cli import with_appcontext
-import flask.cli
-    
+from flask.cli import with_appcontext    
 
 from models import User, Marca, Coche, Comentario
 
