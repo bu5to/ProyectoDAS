@@ -13,7 +13,8 @@ from flask_mail import Mail, Message
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost:5432/bustomoviles'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://bpyzodwvtsscct:309b4d8d7d7fc8d61715e4e9bec4f61b94ba84406ec4b327c52b7924a5137607@ec2-54-247-78-30.eu-west-1.compute.amazonaws.com:5432/d255l5nmsmvmo9"
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost:5432/bustomoviles'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
 app.config['MAIL_SERVER']='smtp.gmail.com'
