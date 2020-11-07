@@ -143,7 +143,11 @@ def logout():
 def coche(coche_id):  
     query = session.query(Coche)
     query = query.filter(Coche.id==coche_id).first()
-    return render_template("coche.html", coche = query)
+    if request.method == 'POST':
+        session.delete(query)
+        return redirect(url_for('index'))
+    else:
+        return render_template("coche.html", coche = query)
 
 @app.route('/buscar', methods=['GET', 'POST'])
 def buscar():

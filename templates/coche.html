@@ -1,33 +1,34 @@
-{% extends 'base.html' %} {% block title %} - Búsqueda {% endblock %}
-{% block head %}
+{% extends 'base.html' %} {% block title %} - Búsqueda {% endblock %} {% block head %}
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-{% endblock %}
-{% block content %}
+{% endblock %} {% block content %}
 
 <section class="w3l-content-with-photo-4" id="about">
-  <div id="content-with-photo4-block" class="py-5"> 
-      <div class="container py-md-3">
-          <div class="cwp4-two row">
-             
-              <div class="cwp4-text col-lg-6">
-                      <h3>{{coche.marca.marca}} {{coche.modelo}}</h3>
-                  <p style="text-align: justify;">{{coche.descripcion}}</p>
-                  <ul class="cont-4">
-                    <li><i class="fas fa-gas-pump" style='color:#4CAF50'></i> {{coche.combustible}}</li>
-                    <li><i class="fas fa-tachometer-alt" style='color:#4CAF50'></i> {{coche.kilometros}} kilómetros</li>
-                    <li><i class="fas fa-city" style='color:#4CAF50'></i> {{coche.ciudad}}</li>
-                    <li><i class="fas fa-calendar" style='color:#4CAF50'></i> {{coche.anyo}}</li>
-                    <li><i class="fas fa-bolt" style='color:#4CAF50'></i> {{coche.potencia}} CV</li>      
-                  </ul>
-                  <h4>{{coche.precio}} €</h4>
-                  <a class="btn btn-secondary btn-theme3 mt-3" href="https://www.paypal.com/us/invoice/invoice-template-generator"> Comprar</a>
-              </div>
-              <div class="cwp4-image col-lg-6 pl-lg-5 mt-lg-0 mt-5">
-                  <img src="{{coche.img}}" class="img-fluid" alt="">
-              </div>
-          </div>
-      </div>
-  </div>
+    <div id="content-with-photo4-block" class="py-5">
+        <div class="container py-md-3">
+            <div class="cwp4-two row">
+
+                <div class="cwp4-text col-lg-6">
+                    <h3>{{coche.marca.marca}} {{coche.modelo}}</h3>
+                    <p style="text-align: justify;">{{coche.descripcion}}</p>
+                    <ul class="cont-4">
+                        <li><i class="fas fa-gas-pump" style='color:#4CAF50'></i> {{coche.combustible}}</li>
+                        <li><i class="fas fa-tachometer-alt" style='color:#4CAF50'></i> {{coche.kilometros}} kilómetros</li>
+                        <li><i class="fas fa-city" style='color:#4CAF50'></i> {{coche.ciudad}}</li>
+                        <li><i class="fas fa-calendar" style='color:#4CAF50'></i> {{coche.anyo}}</li>
+                        <li><i class="fas fa-bolt" style='color:#4CAF50'></i> {{coche.potencia}} CV</li>
+                    </ul>
+                    <h4>{{coche.precio}} €</h4>
+                    <form method="post">
+                        <button type="submit" name="botonCompra" value="Comprar" class="btn btn-secondary btn-theme3 mt-3">Comprar</button>
+                    </form>
+                    <!-- <a class="btn btn-secondary btn-theme3 mt-3" href="https://www.paypal.com/us/invoice/invoice-template-generator"> Comprar</a> -->
+                </div>
+                <div class="cwp4-image col-lg-6 pl-lg-5 mt-lg-0 mt-5">
+                    <img src="{{coche.img}}" class="img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 {% endblock %}
