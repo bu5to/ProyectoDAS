@@ -139,7 +139,7 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/coche/<int:coche_id>')
+@app.route('/coche/<int:coche_id>', methods=["GET", "POST"])
 def coche(coche_id):  
     query = session.query(Coche)
     query = query.filter(Coche.id==coche_id).first()
