@@ -145,6 +145,7 @@ def coche(coche_id):
     query = query.filter(Coche.id==coche_id).first()
     if request.method == 'POST':
         session.delete(query)
+        session.commit()
         return redirect(url_for('index'))
     else:
         return render_template("coche.html", coche = query)
